@@ -9,9 +9,17 @@
 
             <form id="login100-form validate-form" class="w-50 mx-auto" th:method="post" th:action="@{/user/login}"
                   th:object="${viewModel}">
-                <div class="wrap-input100 validate-input m-b-26" data-validate="Email is required">
+                <input type="hidden" name="_csrf" value="c95ccb2b-1afa-47bd-bf7b-a5b72739470b">
+
+                <!--<div class="wrap-input100 validate-input m-b-26" data-validate="Email is required">-->
+                    <!--<span class="label-input100">Username</span>-->
+                    <!--<input class="input100" type="text" name="email" placeholder="Enter email ">-->
+                    <!--<span class="focus-input100"></span>-->
+                <!--</div>-->
+
+                <div class="wrap-input100 validate-input m-b-18" data-validate="username is required">
                     <span class="label-input100">Username</span>
-                    <input class="input100" type="text" name="email" placeholder="Enter email ">
+                    <input class="input100" type="password" name="username" placeholder="Enter username">
                     <span class="focus-input100"></span>
                 </div>
 
