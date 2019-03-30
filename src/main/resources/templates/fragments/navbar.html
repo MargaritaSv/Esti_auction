@@ -1,0 +1,102 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorator="layout">
+<th:block th:fragment="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-th-text="#{navbar_log_in.lang}">Log in</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-th-text="#{navbar_buy.lang}">BUY</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-th-text="#{navbar_sell.lang}">SELL</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                       data-th-text="#{navbar_private.lang}">
+                        Private
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" th:href="@{/private/overview}" data-th-text="#{navbar_overview.lang}">overview</a>
+                        <a class="dropdown-item" th:href="@{/private/buy}"
+                           data-th-text="#{navbar_private_buy.lang}">private buy</a>
+                        <a class="dropdown-item" th:href="@{/private/sell}" data-th-text="#{navbar_private_sell.lang}">Private
+                            sell</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navDepartment" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                       data-th-text="#{navbar_departments.lang}">
+                        Departments
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navDepartment">
+                        <a class="dropdown-item" th:href="@{/department/art}" data-th-text="#{navbar_canvas.lang}">Canvas</a>
+                        <a class="dropdown-item" th:href="@{/department/wines}"
+                           data-th-text="#{navbar_wine.lang}">Wine</a>
+                        <a class="dropdown-item" th:href="@{/department/watches}" data-th-text="#{navbar_watches.lang}">Watches</a>
+                    </div>
+                </li>
+                <li>
+                    <a class="nav-link dropdown-toggle" href="#" id="navDepartment" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    >
+                        Service
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navDepartment">
+                        <a class="dropdown-item" th:href="@{/service/art}"
+                           data-th-text="#{navbar_canvas.lang}">Art</a>
+                        <a class="dropdown-item" th:href="@{/service/wine}"
+                           data-th-text="#{navbar_wine.lang}">Wine</a>
+                        <a class="dropdown-item" th:href="@{/service/watch}" data-th-text="#{navbar_watches.lang}">Watches</a>
+                        <a class="dropdown-item" th:href="@{/service/auction}">Add Auction</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/service/userDetails}">User</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navDepartment" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Language
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="languages">
+                        <a class="dropdown-item" th:href="@{?lang=en}">
+                            <span class="fa-flag-en"></span>
+                            English
+                        </a>
+                        <a class="dropdown-item" th:href="@{?lang=bg}">Bulgaria</a>
+                    </div>
+                </li>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="nav-link" th:href="@{/user/login}" data-th-text="#{navbar_log_in.lang}"></a>
+                </li>
+                |
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="nav-link" th:href="@{/user/register}" data-th-text="#{navbar_register.lang}"></a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a class="nav-link" th:href="@{/user/logout}" data-th-text="#{navbar_log_out.lang}"></a>
+                </li>
+            </ul>
+            <!--<form class="form-inline my-2 my-lg-0">-->
+            <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+            <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+            <!--</form>-->
+        </div>
+    </nav>
+</th:block>
