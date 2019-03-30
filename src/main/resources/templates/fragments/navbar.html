@@ -71,15 +71,15 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navDepartment" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-th-text="#{home.lang.language}">
                         Language
                     </a>
                     <div class="dropdown-menu" aria-labelledby="languages">
-                        <a class="dropdown-item" th:href="@{?lang=en}">
+                        <a class="dropdown-item" th:href="@{?lang=en}" data-th-text="#{home.lang.en}">
                             <span class="fa-flag-en"></span>
                             English
                         </a>
-                        <a class="dropdown-item" th:href="@{?lang=bg}">Bulgaria</a>
+                        <a class="dropdown-item" th:href="@{?lang=bg}" data-th-text="#{home.lang.bg}">Bulgaria</a>
                     </div>
                 </li>
                 <li sec:authorize="isAnonymous()" class="nav-item">

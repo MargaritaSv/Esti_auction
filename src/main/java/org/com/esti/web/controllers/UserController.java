@@ -5,6 +5,7 @@ import org.com.esti.models.service.UserServiceModel;
 import org.com.esti.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("user")
@@ -38,7 +41,7 @@ public class UserController extends BaseController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject(model);
 
-        return super.view("register", modelAndView);
+        return super.view(null,"register", modelAndView);
     }
 
     @PostMapping("/register")
