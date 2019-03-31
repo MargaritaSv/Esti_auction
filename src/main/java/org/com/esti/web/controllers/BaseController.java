@@ -14,6 +14,11 @@ public abstract class BaseController {
         return modelAndView;
     }
 
+    public ModelAndView view(String viewName, ModelAndView modelAndView) {
+        return this.view(null, viewName, modelAndView);
+
+    }
+
     public ModelAndView view(String viewName) {
         return this.view(null, viewName, new ModelAndView());
     }

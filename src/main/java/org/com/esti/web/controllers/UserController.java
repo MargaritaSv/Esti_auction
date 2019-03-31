@@ -1,20 +1,18 @@
 package org.com.esti.web.controllers;
 
+import org.com.esti.models.binding.UserEditBindingModel;
+import org.com.esti.models.view.UserProfileViewModel;
 import org.com.esti.models.binding.UserRegisterBindingModel;
 import org.com.esti.models.service.UserServiceModel;
 import org.com.esti.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("user")
@@ -41,7 +39,7 @@ public class UserController extends BaseController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject(model);
 
-        return super.view(null,"register", modelAndView);
+        return super.view(null, "register", modelAndView);
     }
 
     @PostMapping("/register")
@@ -54,5 +52,25 @@ public class UserController extends BaseController {
         this.userService.registerUser(this.modelMapper.map(model, UserServiceModel.class));
 
         return super.redirect("/login");
+    }
+
+    @GetMapping("edit")
+    public ModelAndView editProfil(Principal principal, ModelAndView modelAndView) {
+        modelAndView.addObject("model",
+                this.modelMapper.map(this.userService.findUserByUserName(principal.getName()), UserProfileViewModel.class));
+
+        return super.view("edit", modelAndView);
+    }
+
+    @PatchMapping("edit")
+    public ModelAndView editProfileConfirm(@ModelAttribute UserEditBindingModel bindingModel) {
+        if (bindingModel.getPassword().equals(bindingModel.getConfirmPassword())) {
+            this.userService.editUserProfile(this.modelMapper.map(bindingModel, UserServiceModel.class), bindingModel.getOldPassword());
+
+            return super.redirect("/user/profile");
+        }
+
+        return super.view("edit_user");
+
     }
 }

@@ -17,9 +17,6 @@
                     <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-th-text="#{navbar_log_in.lang}">Log in</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#" data-th-text="#{navbar_buy.lang}">BUY</a>
                 </li>
                 <li class="nav-item">
@@ -52,13 +49,12 @@
                         <a class="dropdown-item" th:href="@{/department/watches}" data-th-text="#{navbar_watches.lang}">Watches</a>
                     </div>
                 </li>
-                <li>
-                    <a class="nav-link dropdown-toggle" href="#" id="navDepartment" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                    >
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Service
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navDepartment">
+                    <div class="dropdown-menu" aria-labelledby="services">
                         <a class="dropdown-item" th:href="@{/service/art}"
                            data-th-text="#{navbar_canvas.lang}">Art</a>
                         <a class="dropdown-item" th:href="@{/service/wine}"
@@ -70,18 +66,20 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navDepartment" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-th-text="#{home.lang.language}">
+                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                       data-th-text="#{home.lang.language}">
                         Language
                     </a>
                     <div class="dropdown-menu" aria-labelledby="languages">
                         <a class="dropdown-item" th:href="@{?lang=en}" data-th-text="#{home.lang.en}">
-                            <span class="fa-flag-en"></span>
                             English
                         </a>
                         <a class="dropdown-item" th:href="@{?lang=bg}" data-th-text="#{home.lang.bg}">Bulgaria</a>
                     </div>
                 </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
                 <li sec:authorize="isAnonymous()" class="nav-item">
                     <a class="nav-link" th:href="@{/user/login}" data-th-text="#{navbar_log_in.lang}"></a>
                 </li>
@@ -89,14 +87,21 @@
                 <li sec:authorize="isAnonymous()" class="nav-item">
                     <a class="nav-link" th:href="@{/user/register}" data-th-text="#{navbar_register.lang}"></a>
                 </li>
-                <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a class="nav-link" th:href="@{/user/logout}" data-th-text="#{navbar_log_out.lang}"></a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                       data-th-text="#{navbar.lang.profile}">
+                        Profile
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="profile">
+                        <a class="dropdown-item" th:href="@{/user/profile}" data-th-text="#{navbar.lang.profile}">Profile</a>
+                        <a class="dropdown-item" th:href="@{/user/edit}" data-th-text="#{navbar.edit.lang}">Edit</a>
+                        <a class="dropdown-item" th:href="@{/user/logout}"
+                           data-th-text="#{navbar_log_out.lang}">Logout</a>
+
+                    </div>
                 </li>
             </ul>
-            <!--<form class="form-inline my-2 my-lg-0">-->
-            <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-            <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-            <!--</form>-->
         </div>
     </nav>
 </th:block>
