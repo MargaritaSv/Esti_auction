@@ -10,6 +10,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
+import javax.validation.Validation;
+import javax.validation.Validator;
+
 @Configuration
 public class ApplicationBeanConfiguration implements WebMvcConfigurer {
 
@@ -17,6 +20,11 @@ public class ApplicationBeanConfiguration implements WebMvcConfigurer {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+
+//    @Bean
+//    public Validator validator() {
+//        return Validation.buildDefaultValidatorFactory().getValidator();
+//    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {

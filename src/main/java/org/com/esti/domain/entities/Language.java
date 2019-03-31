@@ -44,6 +44,7 @@ public class Language {
     }
 
     @Column(name = "content")
+    @Lob
     public String getContent() {
         return content;
     }

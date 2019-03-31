@@ -25,7 +25,7 @@ public class UserPersonal extends BaseEntity {
     public UserPersonal() {
     }
 
-    @Size(max = 65, message = "Name is too long")
+   // @Size(max = 65, message = "Name is too long")
     @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
@@ -35,7 +35,7 @@ public class UserPersonal extends BaseEntity {
         this.firstName = firstName;
     }
 
-    @Size(max = 65, message = "Name is too long")
+   // @Size(max = 65, message = "Name is too long")
     @Column(name = "middle_name")
     public String getMiddleName() {
         return middleName;
@@ -45,13 +45,13 @@ public class UserPersonal extends BaseEntity {
         this.middleName = middleName;
     }
 
-    @Size(max = 65, message = "Name is too long")
+  //  @Size(max = 65, message = "Name is too long")
     @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }
 
-    @Size(max = 65, message = "Name is too long")
+ //   @Size(max = 65, message = "Name is too long")
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
