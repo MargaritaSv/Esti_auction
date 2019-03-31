@@ -1,6 +1,7 @@
 package org.com.esti.web.controllers;
 
 import org.com.esti.models.binding.UserEditBindingModel;
+import org.com.esti.models.binding.UserLoginBindingModel;
 import org.com.esti.models.view.UserProfileViewModel;
 import org.com.esti.models.binding.UserRegisterBindingModel;
 import org.com.esti.models.service.UserServiceModel;
@@ -28,13 +29,17 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/login")
-    @PreAuthorize("isAnonymous()")
+  //  @PreAuthorize("isAnonymous()")
     public ModelAndView login() {
         return super.view("login");
     }
 
+    //    @PostMapping("/login")
+//    public ModelAndView loginConfirm(@ModelAttribute UserLoginBindingModel bindingModel){
+//        this.userService.
+//    }
     @GetMapping("/register")
-    @PreAuthorize("isAnonymous()")
+ //   @PreAuthorize("isAnonymous()")
     public ModelAndView register(@ModelAttribute(name = "viewModel") UserRegisterBindingModel model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject(model);
@@ -43,7 +48,7 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/register")
-    @PreAuthorize("isAnonymous()")
+  //  @PreAuthorize("isAnonymous()")
     public ModelAndView registerConfirm(@ModelAttribute UserRegisterBindingModel model) {
         if (!model.getPassword().equals(model.getConfirmPassword())) {
             return super.view("register");
@@ -54,15 +59,15 @@ public class UserController extends BaseController {
         return super.redirect("/login");
     }
 
-    @GetMapping("edit")
-    public ModelAndView editProfil(Principal principal, ModelAndView modelAndView) {
+    @GetMapping("/edit")
+    public ModelAndView editProfile(Principal principal, ModelAndView modelAndView) {
         modelAndView.addObject("model",
                 this.modelMapper.map(this.userService.findUserByUserName(principal.getName()), UserProfileViewModel.class));
 
-        return super.view("edit", modelAndView);
+        return super.view("edit_user", modelAndView);
     }
 
-    @PatchMapping("edit")
+    @PatchMapping("/edit")
     public ModelAndView editProfileConfirm(@ModelAttribute UserEditBindingModel bindingModel) {
         if (bindingModel.getPassword().equals(bindingModel.getConfirmPassword())) {
             this.userService.editUserProfile(this.modelMapper.map(bindingModel, UserServiceModel.class), bindingModel.getOldPassword());

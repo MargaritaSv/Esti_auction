@@ -17,13 +17,14 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 //        auth
 //                .inMemoryAuthentication()
-//                .withUser("USER")
-//                .password("password")
-//                .roles("USER")
-//                .and()
-//                .withUser("ADMIN")
-//                .password("password")
-//                .roles("ADMIN","USER");
+//                    .withUser("USER")
+//                        .password("password")
+//                        .roles("USER")
+//                        .and()
+//                  .withUser("ADMIN")
+//                        .password("password")
+//                        .roles("ADMIN","USER");
+                        //.and();
     }
 
     @Override
@@ -40,10 +41,10 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 //                    .loginPage("/user/login")
 //                    .usernameParameter("username")
 //                    .passwordParameter("password")
-//                    .defaultSuccessUrl("/")
-//                .permitAll()
+//                    .defaultSuccessUrl("/index")
+//                    .permitAll()
 //                    .and()
 //                .logout()
-//                .logoutSuccessUrl("/");
+//                .logoutSuccessUrl("/index");
     }
 }

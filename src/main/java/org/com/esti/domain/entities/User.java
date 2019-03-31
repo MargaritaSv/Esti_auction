@@ -11,22 +11,13 @@ import java.util.Set;
 @Table(name = "users")
 public class User extends BaseEntity implements UserDetails {
 
-    // private UserDetails userDetailsId;
-  //  private String email;
     private String username;
     private String password;
     private Set<Role> authorities;
+    private UserPersonal userPersonal;
 
     public User() {
     }
-
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
 
     @Override
     @Column(name = "username", nullable = false, unique = true, updatable = false)
@@ -71,7 +62,18 @@ public class User extends BaseEntity implements UserDetails {
         this.authorities = authorities;
     }
 
-//    @Override
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "user")
+    public UserPersonal getUserPersonal() {
+        return userPersonal;
+    }
+
+    public void setUserPersonal(UserPersonal userPersonal) {
+        this.userPersonal = userPersonal;
+    }
+
+    //    @Override
 //    public String getUsername() {
 //        return null;
 //    }
