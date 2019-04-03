@@ -87,7 +87,7 @@
                 <li sec:authorize="isAnonymous()" class="nav-item">
                     <a class="nav-link" th:href="@{/user/register}" data-th-text="#{navbar_register.lang}"></a>
                 </li>
-                <li class="nav-item dropdown">
+                <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                        data-th-text="#{navbar.lang.profile}">
