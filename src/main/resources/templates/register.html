@@ -61,12 +61,14 @@
                 <!--type="text" id="secondAddress" placeholder="Address /optional/..."-->
                 <!--name="secondAddress">-->
                 <!--</div>-->
-                <div class="wrap-input100 validate-input m-b-26">
-                    <span class="label-input100" for="email">Email</span>
-                    <input class="input100"
-                           type="email" id="email" placeholder="Email..." name="email">
 
-                </div>
+
+                <!--<div class="wrap-input100 validate-input m-b-26">-->
+                    <!--<span class="label-input100" for="email">Email</span>-->
+                    <!--<input class="input100"-->
+                           <!--type="email" id="email" placeholder="Email..." name="email">-->
+
+                <!--</div>-->
                 <div class="wrap-input100 validate-input m-b-26"
                      th:classappend="${#fields.hasErrors('password')}? 'text-danger'">
                     <span class="label-input100" for="password">Password</span>
@@ -74,7 +76,7 @@
                            type="password" th:field="*{password}" id="password"
                            placeholder="Password..."
                            name="password">
-                    <!--<small th:each="error : ${#fields.errors('password')}" th:text="${error}"></small>-->
+                    <small th:each="error : ${#fields.errors('password')}" th:text="${error}"></small>
 
                 </div>
                 <div class="wrap-input100 validate-input m-b-26"
@@ -84,7 +86,7 @@
                            type="password" th:field="*{confirmPassword}" id="confirmPassword"
                            placeholder="Confirm Password..."
                            name="confirmPassword">
-                    <!--<small th:each="error : ${#fields.errors('confirmPassword')}" th:text="${error}"></small>-->
+                    <small th:each="error : ${#fields.errors('confirmPassword')}" th:text="${error}"></small>
 
                 </div>
                 <div class="container-login100-form-btn m-1">

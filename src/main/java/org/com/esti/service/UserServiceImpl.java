@@ -1,6 +1,7 @@
 package org.com.esti.service;
 
 import org.com.esti.domain.entities.User;
+import org.com.esti.domain.entities.UserPersonal;
 import org.com.esti.models.service.UserServiceModel;
 import org.com.esti.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import java.util.LinkedHashSet;
 
@@ -30,6 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
+
         this.roleService.seedRolesInDb();
         if (this.userRepository.count() == 0) {
             userServiceModel.setAuthorities(this.roleService.findAllRoles());
@@ -41,6 +44,9 @@ public class UserServiceImpl implements UserService {
 
         User user = this.modelMapper.map(userServiceModel, User.class);
         user.setPassword(this.bCryptPasswordEncoder.encode(userServiceModel.getPassword()));
+
+//        UserPersonal personal = new UserPersonal();
+//        personal.setUser(user);
 
         return this.modelMapper.map(this.userRepository.saveAndFlush(user), UserServiceModel.class);
     }

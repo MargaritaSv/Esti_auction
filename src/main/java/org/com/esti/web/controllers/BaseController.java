@@ -6,7 +6,9 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
 public abstract class BaseController {
-    public ModelAndView view(Map<String, Local> map, String viewName, ModelAndView modelAndView) {
+    protected ModelAndView view(Map<String, Local> map, String viewName, Object object) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("viewModel", object);
         modelAndView.setViewName("fragments/layout");
         modelAndView.addObject("viewName", viewName);
         modelAndView.addObject("title", null);
@@ -14,16 +16,22 @@ public abstract class BaseController {
         return modelAndView;
     }
 
-    public ModelAndView view(String viewName, ModelAndView modelAndView) {
-        return this.view(null, viewName, modelAndView);
-
+    protected ModelAndView view(String viewName, Object object) {
+        return this.view(null, viewName, object);
     }
 
-    public ModelAndView view(String viewName) {
-        return this.view(null, viewName, new ModelAndView());
+    protected ModelAndView view(String viewName) {
+        return this.view(null, viewName, new Object());
     }
 
-    public ModelAndView redirect(String url) {
-        return this.view("redirect:" + url);
+    protected ModelAndView redirect(String url) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:" + url);
+
+        return this.redirect(null, modelAndView);
+    }
+
+    private ModelAndView redirect(Map<String, Local> map, ModelAndView modelAndView) {
+        return modelAndView;
     }
 }

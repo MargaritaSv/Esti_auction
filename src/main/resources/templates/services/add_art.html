@@ -9,51 +9,51 @@
         <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'text-danger'">
             <label for="name" class="col-sm-2 col-form-label">Name</label>
             <input type="text" class="form-control" id="name" th:field="*{name}" name="name">
-            <!--<small th:each="error : ${#fields.errors('name')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('name')}" th:text="${error}"></small>
         </div>
         <div class="form-group">
             <label for="author">Author</label>
             <input type="text" class="form-control text-input" th:field="*{author}" id="author" name="author">
-            <!--<small th:each="error : ${#fields.errors('author')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('author')}" th:text="${error}"></small>
         </div>
         <div class="form-group" th:classappend="${#fields.hasErrors('description')}? 'text-danger'">
             <label for="description">Description</label>
             <input type="text" class="form-control text-input" th:field="*{description}" id="description"
                    name="description">
-            <!--<small th:each="error : ${#fields.errors('description')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('description')}" th:text="${error}"></small>
         </div>
         <div class=" form-group" th:classappend="${#fields.hasErrors('paintedTo')}? 'text-danger'">
             <label for="paintedTo" class="col-sm-2 col-form-label">paintedTo</label>
             <input type="date" class="form-control" id="paintedTo" th:field="*{paintedTo}" name="paintedTo">
-            <!--<small th:each="error : ${#fields.errors('paintedTo')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('paintedTo')}" th:text="${error}"></small>
         </div>
 
         <div class=" form-group" th:classappend="${#fields.hasErrors('paintedFrom')}? 'text-danger'">
             <label for="paintedFrom" class="col-sm-2 col-form-label">paintedFrom</label>
             <input type="date" class="form-control" id="paintedFrom" th:field="*{paintedFrom}" name="paintedFrom">
-            <!--<small th:each="error : ${#fields.errors('paintedFrom')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('paintedFrom')}" th:text="${error}"></small>
         </div>
         <div class=" form-group" th:classappend="${#fields.hasErrors('width')}? 'text-danger'">
             <label for="width" class="col-sm-2 col-form-label">width</label>
             <input type="number" class="form-control" id="width" th:field="*{width}" name="width">
-            <!--<small th:each="error : ${#fields.errors('width')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('width')}" th:text="${error}"></small>
         </div>
         <div class=" form-group" th:classappend="${#fields.hasErrors('height')}? 'text-danger'">
             <label for="height" class="col-sm-2 col-form-label">height</label>
             <input type="number" class="form-control" id="height" th:field="*{height}" name="height">
-            <!--<small th:each="error : ${#fields.errors('height')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('height')}" th:text="${error}"></small>
         </div>
         <div class="form-group" th:classappend="${#fields.hasErrors('estimateFrom')}? 'text-danger'">
             <label for="estimateFrom">Price to</label>
             <input type="number" class="form-control text-input" th:field="*{estimateFrom}" id="estimateFrom"
                    name="estimateFrom">
-            <!--<small th:each="error : ${#fields.errors('estimateFrom')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('estimateFrom')}" th:text="${error}"></small>
         </div>
         <div class="form-group" th:classappend="${#fields.hasErrors('estimateTo')}? 'text-danger'">
             <label for="estimateTo">Price from</label>
             <input type="number" class="form-control text-input" th:field="*{estimateTo}" id="estimateTo"
                    name="estimateTo">
-            <!--<small th:each="error : ${#fields.errors('estimateTo')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('estimateTo')}" th:text="${error}"></small>
         </div>
 
         <!--<div class="form-group" th:classappend="${#fields.hasErrors('estimateBy')}? 'text-danger'">-->
@@ -61,7 +61,7 @@
         <!--<input type="text" class="form-control text-input" th:field="*{estimateBy}" id="estimateBy" name="estimateBy">-->
         <!--&lt;!&ndash;<small th:each="error : ${#fields.errors('estimateTo')}" th:text="${error}"></small>&ndash;&gt;-->
         <!--</div>-->
-        <button type="submit">SUBMIT</button>
+        <button>SUBMIT</button>
 
     </form>
 </div>

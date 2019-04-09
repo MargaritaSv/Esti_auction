@@ -32,28 +32,28 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 //                  .withUser("ADMIN")
 //                        .password("password")
 //                        .roles("ADMIN","USER");
-                        //.and();
+        //.and();
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .cors().disable()
-//                .csrf().disable()
-//                .authorizeRequests()
-//                    .antMatchers("/js/**", "/css/**").permitAll()
-//                    .antMatchers("/", "/user/register", "/user/login").anonymous()
-//                    .anyRequest().authenticated()
-//                    .and()
-//                .formLogin()
-//                    .loginPage("/user/login")
-//                    .usernameParameter("username")
-//                    .passwordParameter("password")
-//                    .defaultSuccessUrl("/index")
-//                    .permitAll()
-//                    .and()
-//                .logout()
-//                .logoutSuccessUrl("/index");
+        http
+                .cors().disable()
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers( "/js/**", "/css/**").permitAll()
+                .antMatchers("/", "/department/**", "/private/**", "/user/register", "/user/login").anonymous()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/user/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/")
+                // .permitAll()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/index");
 
 //        http
 //                .headers()

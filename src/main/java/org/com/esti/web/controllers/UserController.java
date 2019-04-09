@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,27 +40,26 @@ public class UserController extends BaseController {
 //        this.userService.
 //    }
     @GetMapping("/register")
- //   @PreAuthorize("isAnonymous()")
+  //  @PreAuthorize("isAnonymous()")
     public ModelAndView register(@ModelAttribute(name = "viewModel") UserRegisterBindingModel model) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject(model);
-
-        return super.view(null, "register", modelAndView);
+        return super.view(null, "register", model);
     }
 
     @PostMapping("/register")
   //  @PreAuthorize("isAnonymous()")
-    public ModelAndView registerConfirm(@ModelAttribute UserRegisterBindingModel model) {
-        if (!model.getPassword().equals(model.getConfirmPassword())) {
-            return super.view("register");
+    public ModelAndView registerConfirm(@ModelAttribute UserRegisterBindingModel bindingModel) {
+
+        if (!bindingModel.getPassword().equals(bindingModel.getConfirmPassword())) {
+            return super.view("/register",bindingModel);
         }
 
-        this.userService.registerUser(this.modelMapper.map(model, UserServiceModel.class));
+        this.userService.registerUser(this.modelMapper.map(bindingModel, UserServiceModel.class));
 
-        return super.redirect("/login");
+        return super.redirect("/user/login");
     }
 
     @GetMapping("/edit")
+    @PreAuthorize("isAuthenticated()")
     public ModelAndView editProfile(Principal principal, ModelAndView modelAndView) {
         modelAndView.addObject("model",
                 this.modelMapper.map(this.userService.findUserByUserName(principal.getName()), UserProfileViewModel.class));
@@ -68,6 +68,7 @@ public class UserController extends BaseController {
     }
 
     @PatchMapping("/edit")
+    @PreAuthorize("isAuthenticated()")
     public ModelAndView editProfileConfirm(@ModelAttribute UserEditBindingModel bindingModel) {
         if (bindingModel.getPassword().equals(bindingModel.getConfirmPassword())) {
             this.userService.editUserProfile(this.modelMapper.map(bindingModel, UserServiceModel.class), bindingModel.getOldPassword());
