@@ -53,7 +53,8 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 // .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/index");
+                .logoutSuccessUrl("/")
+        .and();
 
 //        http
 //                .headers()

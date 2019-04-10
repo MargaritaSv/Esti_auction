@@ -20,7 +20,11 @@ public class DBMessageSource extends AbstractMessageSource {
 
     @Override
     protected MessageFormat resolveCode(String key, Locale locale) {
+System.out.println(locale);
+if(!locale.toString().equals("en") || !locale.toString().equals("bg")){
+    locale.getLanguage();
 
+}
         Language message = languageRepository.findByMessageKeyAndLocale(key, locale.getLanguage());
 
         if (message == null) {
