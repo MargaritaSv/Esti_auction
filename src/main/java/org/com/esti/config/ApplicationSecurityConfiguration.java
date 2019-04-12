@@ -55,16 +55,16 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                     .and()
                 .logout()
                     .logoutSuccessUrl("/")
-                    .and()
-                .rememberMe()
-                    .key("my-secure-key")
-                    .rememberMeCookieName("my-remember-me-cookie")
-                    .tokenRepository(persistentTokenRepository())
-                    .tokenValiditySeconds(24 * 60 * 60)
-                    .and()
-                    .exceptionHandling()
-                    //.key("workerKey")
                     .and();
+//                .rememberMe()
+//                    .key("my-secure-key")
+//                    .rememberMeCookieName("my-remember-me-cookie")
+//                    .tokenRepository(persistentTokenRepository())
+//                    .tokenValiditySeconds(24 * 60 * 60)
+//                    .and()
+//                    .exceptionHandling()
+//                    //.key("workerKey")
+//                    .and();
 
 //        http
 //                .headers()
