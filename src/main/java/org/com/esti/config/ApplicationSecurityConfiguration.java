@@ -41,8 +41,9 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .cors().disable()
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers( "/resources/**","/js/**", "/css/**").permitAll()
-                    .antMatchers( "/","/department/**", "/private/**", "/user/register", "/user/login").anonymous()
+                    .antMatchers( "/","/department/**", "/private/**","/resources/**","/js/**", "/css/**").permitAll()
+                   // .antMatchers( ).permitAll()
+                .antMatchers( "/user/register", "/user/login").anonymous()
                     .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -51,7 +52,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                     .passwordParameter("password")
                     .defaultSuccessUrl("/")
                     // .permitAll()
-                .and()
+                    .and()
                 .logout()
                     .logoutSuccessUrl("/")
                     .and()
@@ -62,7 +63,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                     .tokenValiditySeconds(24 * 60 * 60)
                     .and()
                     .exceptionHandling()
-                   // .key("workerKey");
+                    //.key("workerKey")
                     .and();
 
 //        http

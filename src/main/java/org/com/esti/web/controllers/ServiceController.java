@@ -29,8 +29,8 @@ public class ServiceController extends BaseController {
     }
 
     @GetMapping("/art")
-    public ModelAndView addArt(@ModelAttribute( "viewModel") ArtAddBindingModel bindingModel, ModelAndView modelAndView) {
-       modelAndView.addObject("viewModel",new ArtAddBindingModel());
+    public ModelAndView addArt(@ModelAttribute("viewModel") ArtAddBindingModel bindingModel, ModelAndView modelAndView) {
+        modelAndView.addObject("viewModel", bindingModel);
         return super.view("services/add_art", modelAndView);
     }
 
