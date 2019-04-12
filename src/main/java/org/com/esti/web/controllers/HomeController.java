@@ -12,7 +12,7 @@ import java.util.Map;
 public class HomeController extends BaseController {
 
     @GetMapping("/")
-   // @PreAuthorize("isAuthenticated()")
+   //@PreAuthorize("isAuthenticated()")
     // @PreAuthorize("isAnonymous()")
     public ModelAndView home() {
         return super.view("index");

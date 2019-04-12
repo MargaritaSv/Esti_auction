@@ -32,19 +32,19 @@ public class ApplicationBeanConfiguration implements WebMvcConfigurer {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public LocaleResolver localeResolver() {
-        return new CookieLocaleResolver();
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
-        interceptor.setParamName("lang");
-        registry.addInterceptor(interceptor);
-
-        //  registry.addInterceptor(captchaInterceptor);
-    }
+//    @Bean
+//    public LocaleResolver localeResolver() {
+//        return new CookieLocaleResolver();
+//    }
+//
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+//        interceptor.setParamName("lang");
+//        registry.addInterceptor(interceptor);
+//
+//        //  registry.addInterceptor(captchaInterceptor);
+ //   }
 
 //    public SpringSecurityDialect securityDialect() {
 //        return new SpringSecurityDialect();

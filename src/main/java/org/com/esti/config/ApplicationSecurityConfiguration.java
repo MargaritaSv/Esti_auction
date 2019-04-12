@@ -31,8 +31,8 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 //                        .and()
 //                  .withUser("ADMIN")
 //                        .password("password")
-//                        .roles("ADMIN","USER");
-        //.and();
+//                        .roles("ADMIN","USER")
+//                        .and();
     }
 
     @Override
@@ -41,20 +41,29 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .cors().disable()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers( "/js/**", "/css/**").permitAll()
-                .antMatchers("/", "/department/**", "/private/**", "/user/register", "/user/login").anonymous()
-                .anyRequest().authenticated()
+                    .antMatchers( "/resources/**","/js/**", "/css/**").permitAll()
+                    .antMatchers( "/","/department/**", "/private/**", "/user/register", "/user/login").anonymous()
+                    .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/user/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/")
-                // .permitAll()
+                    .loginPage("/user/login")
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .defaultSuccessUrl("/")
+                    // .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/")
-        .and();
+                    .logoutSuccessUrl("/")
+                    .and()
+                .rememberMe()
+                    .key("my-secure-key")
+                    .rememberMeCookieName("my-remember-me-cookie")
+                    .tokenRepository(persistentTokenRepository())
+                    .tokenValiditySeconds(24 * 60 * 60)
+                    .and()
+                    .exceptionHandling()
+                   // .key("workerKey");
+                    .and();
 
 //        http
 //                .headers()

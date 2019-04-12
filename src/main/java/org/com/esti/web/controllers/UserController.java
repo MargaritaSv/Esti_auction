@@ -30,7 +30,7 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/login")
-  //  @PreAuthorize("isAnonymous()")
+    @PreAuthorize("isAnonymous()")
     public ModelAndView login() {
         return super.view("login");
     }
@@ -40,13 +40,13 @@ public class UserController extends BaseController {
 //        this.userService.
 //    }
     @GetMapping("/register")
-  //  @PreAuthorize("isAnonymous()")
+   @PreAuthorize("isAnonymous()")
     public ModelAndView register(@ModelAttribute(name = "viewModel") UserRegisterBindingModel model) {
         return super.view(null, "register", model);
     }
 
     @PostMapping("/register")
-  //  @PreAuthorize("isAnonymous()")
+    @PreAuthorize("isAnonymous()")
     public ModelAndView registerConfirm(@ModelAttribute UserRegisterBindingModel bindingModel) {
 
         if (!bindingModel.getPassword().equals(bindingModel.getConfirmPassword())) {
