@@ -1,10 +1,13 @@
 package org.com.esti.web.controllers;
 
+import org.com.esti.domain.entities.User;
+import org.com.esti.domain.entities.UserPersonal;
 import org.com.esti.models.binding.ArtAddBindingModel;
 import org.com.esti.models.service.ArtServiceModel;
 import org.com.esti.service.ArtService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,20 +32,19 @@ public class ServiceController extends BaseController {
     }
 
     @GetMapping("/art")
-    public ModelAndView addArt(@ModelAttribute("viewModel") ArtAddBindingModel bindingModel, ModelAndView modelAndView) {
-        modelAndView.addObject("viewModel", bindingModel);
-        return super.view("services/add_art", modelAndView);
+    public ModelAndView addArt(@ModelAttribute("viewModel") ArtAddBindingModel bindingModel) {
+        return super.view("services/add_art", bindingModel);
     }
 
     @PostMapping("/art")
-    public ModelAndView addArtConfirm(@Valid @ModelAttribute("viewModel") ArtAddBindingModel bindingModel,
-                                      ModelAndView modelAndView,
-                                      BindingResult bindingResult) {
+    public ModelAndView addArtConfirm(@Valid @ModelAttribute("viewModel") ArtAddBindingModel bindingModel, BindingResult bindingResult,Authentication authentication) {
+        UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();
 
-        //  modelAndView.addObject(bindingModel);
         if (bindingResult.hasErrors()) {
-            return super.view("services/add_art", modelAndView);
+            return super.view("services/add_art", bindingModel);
         }
+
+        bindingModel.setEstimatedBy(userPersonal);
 
         ArtServiceModel artServiceModel = this.artService.add(this.modelMapper.map(bindingModel, ArtServiceModel.class));
         if (artServiceModel == null) {

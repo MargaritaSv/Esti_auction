@@ -54,8 +54,8 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                     // .permitAll()
                     .and()
                 .logout()
-                    .logoutSuccessUrl("/")
-                    .and();
+                    .logoutSuccessUrl("/user/register");
+                  //  .and();
 //                .rememberMe()
 //                    .key("my-secure-key")
 //                    .rememberMeCookieName("my-remember-me-cookie")

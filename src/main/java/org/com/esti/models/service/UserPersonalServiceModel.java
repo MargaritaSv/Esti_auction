@@ -1,14 +1,12 @@
-package org.com.esti.domain.entities;
+package org.com.esti.models.service;
 
+import org.com.esti.domain.entities.User;
 import org.com.esti.domain.entities.enums.Gender;
 
-import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "user_details")
-public class UserPersonal extends BaseEntity {
+public class UserPersonalServiceModel extends BaseServiceModel {
+    private Long id;
 
     private String firstName;
     private String middleName;
@@ -22,11 +20,20 @@ public class UserPersonal extends BaseEntity {
     private String cardNumber;
     private User user;
 
-    public UserPersonal() {
+    public UserPersonalServiceModel() {
     }
 
-   // @Size(max = 65, message = "Name is too long")
-    @Column(name = "first_name")
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -35,8 +42,6 @@ public class UserPersonal extends BaseEntity {
         this.firstName = firstName;
     }
 
-   // @Size(max = 65, message = "Name is too long")
-    @Column(name = "middle_name")
     public String getMiddleName() {
         return middleName;
     }
@@ -45,18 +50,14 @@ public class UserPersonal extends BaseEntity {
         this.middleName = middleName;
     }
 
-  //  @Size(max = 65, message = "Name is too long")
-    @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }
 
- //   @Size(max = 65, message = "Name is too long")
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    @Column(name = "birthday")
     public LocalDate getBirthday() {
         return birthday;
     }
@@ -65,8 +66,6 @@ public class UserPersonal extends BaseEntity {
         this.birthday = birthday;
     }
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
     public Gender getGender() {
         return gender;
     }
@@ -75,7 +74,6 @@ public class UserPersonal extends BaseEntity {
         this.gender = gender;
     }
 
-    @Column(name = "primary_address")
     public String getPrimaryAddress() {
         return primaryAddress;
     }
@@ -84,7 +82,6 @@ public class UserPersonal extends BaseEntity {
         this.primaryAddress = primaryAddress;
     }
 
-    @Column(name = "second_address")
     public String getSecondAddress() {
         return secondAddress;
     }
@@ -93,7 +90,6 @@ public class UserPersonal extends BaseEntity {
         this.secondAddress = secondAddress;
     }
 
-    @Column(name = "country")
     public String getCountry() {
         return country;
     }
@@ -102,7 +98,6 @@ public class UserPersonal extends BaseEntity {
         this.country = country;
     }
 
-    @Column(name = "email", unique = true)
     public String getEmail() {
         return email;
     }
@@ -111,7 +106,6 @@ public class UserPersonal extends BaseEntity {
         this.email = email;
     }
 
-    @Column(name = "card_number")
     public String getCardNumber() {
         return cardNumber;
     }
@@ -120,8 +114,6 @@ public class UserPersonal extends BaseEntity {
         this.cardNumber = cardNumber;
     }
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
     public User getUser() {
         return user;
     }

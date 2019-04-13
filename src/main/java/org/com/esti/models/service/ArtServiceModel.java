@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class ArtServiceModel {
+public class ArtServiceModel extends AuctionObjectServiceModel {
     private String author;
     private LocalDate paintedTo;
     private LocalDate paintedFrom;

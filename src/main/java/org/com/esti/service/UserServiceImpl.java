@@ -2,7 +2,9 @@ package org.com.esti.service;
 
 import org.com.esti.domain.entities.User;
 import org.com.esti.domain.entities.UserPersonal;
+import org.com.esti.models.service.UserPersonalServiceModel;
 import org.com.esti.models.service.UserServiceModel;
+import org.com.esti.repository.UserPersonalRepository;
 import org.com.esti.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 
 import java.util.LinkedHashSet;
 
@@ -21,13 +22,15 @@ public class UserServiceImpl implements UserService {
     private final RoleService roleService;
     private final ModelMapper modelMapper;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserPersonalRepository userPersonalRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleService roleService, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleService roleService, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder, UserPersonalRepository userPersonalRepository) {
         this.userRepository = userRepository;
         this.roleService = roleService;
         this.modelMapper = modelMapper;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.userPersonalRepository = userPersonalRepository;
     }
 
     @Override
@@ -45,10 +48,14 @@ public class UserServiceImpl implements UserService {
         User user = this.modelMapper.map(userServiceModel, User.class);
         user.setPassword(this.bCryptPasswordEncoder.encode(userServiceModel.getPassword()));
 
-//        UserPersonal personal = new UserPersonal();
-//        personal.setUser(user);
+        UserServiceModel userServiceModel1 = this.modelMapper.map(this.userRepository.saveAndFlush(user), UserServiceModel.class);
 
-        return this.modelMapper.map(this.userRepository.saveAndFlush(user), UserServiceModel.class);
+        UserPersonal userPersonal = new UserPersonal();
+        userPersonal.setUser(user);
+
+        UserPersonalServiceModel personal = this.modelMapper.map(this.userPersonalRepository.saveAndFlush(userPersonal), UserPersonalServiceModel.class);
+
+        return userServiceModel1;
     }
 
     @Override

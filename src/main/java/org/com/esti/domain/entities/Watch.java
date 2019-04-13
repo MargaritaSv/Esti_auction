@@ -20,7 +20,7 @@ public class Watch extends AuctionObject {
     private Closure closure;
     private Integer dimensions;
     private WatchCollection collection;
-  //  private UserPersonal user;
+  //  private UserPersonalService user;
 
     public Watch() {
     }
@@ -83,11 +83,11 @@ public class Watch extends AuctionObject {
         this.collection = collection;
     }
 
-//    public UserPersonal getUser() {
+//    public UserPersonalService getUser() {
 //        return user;
 //    }
 //
-//    public void setUser(UserPersonal user) {
+//    public void setUser(UserPersonalService user) {
 //        this.user = user;
   //  }
 }
