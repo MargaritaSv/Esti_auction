@@ -5,6 +5,7 @@ import org.com.esti.domain.entities.UserPersonal;
 import org.com.esti.models.binding.ArtAddBindingModel;
 import org.com.esti.models.service.ArtServiceModel;
 import org.com.esti.service.ArtService;
+import org.com.esti.service.CloudinaryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/service")
@@ -24,11 +26,13 @@ public class ServiceController extends BaseController {
 
     private final ArtService artService;
     private final ModelMapper modelMapper;
+    private final CloudinaryService cloudinarySErvice;
 
     @Autowired
-    public ServiceController(ArtService artService, ModelMapper modelMapper) {
+    public ServiceController(ArtService artService, ModelMapper modelMapper, CloudinaryService cloudinarySErvice) {
         this.artService = artService;
         this.modelMapper = modelMapper;
+        this.cloudinarySErvice = cloudinarySErvice;
     }
 
     @GetMapping("/art")
@@ -37,16 +41,19 @@ public class ServiceController extends BaseController {
     }
 
     @PostMapping("/art")
-    public ModelAndView addArtConfirm(@Valid @ModelAttribute("viewModel") ArtAddBindingModel bindingModel, BindingResult bindingResult,Authentication authentication) {
-        UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();
+    public ModelAndView addArtConfirm(@Valid @ModelAttribute("viewModel") ArtAddBindingModel bindingModel, BindingResult bindingResult, Authentication authentication) throws IOException {
 
         if (bindingResult.hasErrors()) {
             return super.view("services/add_art", bindingModel);
         }
 
+        UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();
         bindingModel.setEstimatedBy(userPersonal);
 
-        ArtServiceModel artServiceModel = this.artService.add(this.modelMapper.map(bindingModel, ArtServiceModel.class));
+        ArtServiceModel artServiceModel = new ArtServiceModel();
+        artServiceModel.setImageUrl(this.cloudinarySErvice.uploadImages(bindingModel.getImageUrl()));
+        artServiceModel = this.artService.add(this.modelMapper.map(bindingModel, ArtServiceModel.class));
+
         if (artServiceModel == null) {
             throw new IllegalArgumentException("Something went wrong!");
         }

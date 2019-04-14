@@ -11,15 +11,18 @@ import org.springframework.stereotype.Service;
 public class ArtServiceImpl implements ArtService {
     private final ArtRepository artRepository;
     private final ModelMapper modelMapper;
+    private final CloudinaryService cloudinarySErvice;
 
     @Autowired
-    public ArtServiceImpl(ArtRepository artRepository, ModelMapper modelMapper) {
+    public ArtServiceImpl(ArtRepository artRepository, ModelMapper modelMapper, CloudinaryService cloudinarySErvice) {
         this.artRepository = artRepository;
         this.modelMapper = modelMapper;
+        this.cloudinarySErvice = cloudinarySErvice;
     }
 
     @Override
     public ArtServiceModel add(ArtServiceModel artServiceModel) {
+
         Art art = this.modelMapper.map(artServiceModel, Art.class);
 
         try {

@@ -1,6 +1,7 @@
 package org.com.esti.models.binding;
 
 import org.com.esti.domain.entities.UserPersonal;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ import java.util.Date;
 public class AuctionObjectAddBindingModel {
 
     private String name;
+    private MultipartFile imageUrl;
     private BigDecimal estimateTo;
     private BigDecimal estimateFrom;
     private UserPersonal estimatedBy;
@@ -28,6 +30,14 @@ public class AuctionObjectAddBindingModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public MultipartFile getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(MultipartFile imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @NotNull

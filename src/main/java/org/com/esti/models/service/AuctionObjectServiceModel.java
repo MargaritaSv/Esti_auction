@@ -1,6 +1,7 @@
 package org.com.esti.models.service;
 
 import org.com.esti.domain.entities.UserPersonal;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.Date;
 public class AuctionObjectServiceModel {
     private Long id;
     private String name;
+    private String imageUrl;
     private BigDecimal estimateTo;
     private BigDecimal estimateFrom;
     private UserPersonal estimatedBy;
@@ -31,6 +33,14 @@ public class AuctionObjectServiceModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public BigDecimal getEstimateTo() {

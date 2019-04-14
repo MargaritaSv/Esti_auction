@@ -21,6 +21,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public abstract class AuctionObject extends BaseEntity {
 
     private String name;
+    private String imageUrl;
     private BigDecimal estimateTo;
     private BigDecimal estimateFrom;
     private UserPersonal estimatedBy;
@@ -36,6 +37,14 @@ public abstract class AuctionObject extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public BigDecimal getEstimateTo() {
