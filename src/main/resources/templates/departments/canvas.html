@@ -1,0 +1,41 @@
+<section id="main-head" class="canvas">
+</section>
+<section id="main-content" class="mt-2">
+    <div class="text-intro">
+        <h2 data-th-text="#{navbar_canvas.lang}"></h2>
+    </div>
+    <div class="columns features">
+        <th:block th:each="canvas : ${viewModel}">
+            <!--<div style="width: 100%;position: relative ">-->
+            <div class="row mt-3">
+                <div class="auction-imageUrl" style="float: left; width: 30%;">
+                    <!--<a class="imageUrl-capture" href="#">-->
+                    <div class="text-center">
+                        <img th:src="${canvas.imageUrl}"  alt="canvas">
+
+                    </div>
+                    <!--</a>-->
+                </div>
+                <div style="width: 50%; float: left; padding: 3%">
+                    <div class="auction-details" style="float: left;">
+                        <h4 th:text="${canvas.name}"></h4>
+                        <p th:text="${canvas.author}"></p>
+                    </div>
+                    <div class="estimate">
+                        <div class="left-section" style="float: left;position: relative">
+                            Estimate:
+                            <span th:text="${canvas.estimateFrom}"></span>
+                            -
+                            <span th:text="${canvas.estimateTo}"></span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="text-center btn btn-info" style="margin-top: 95%">BIT</button>
+                </div>
+                <div>
+                    <a class="btn btn-light" th:href="@{/service/art/edit/{id}(id=${canvas.id})}">EDIT</a></div>
+            </div>
+        </th:block>
+    </div>
+</section>

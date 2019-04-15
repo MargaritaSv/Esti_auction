@@ -1,17 +1,9 @@
-package org.com.esti.domain.entities;
+package org.com.esti.models.view;
 
-import org.com.esti.resources.YearAttributeConverter;
-
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.Year;
 
-@Entity
-@Table(name = "art")
-public class Art extends AuctionObject {
+public class ArtViewModel extends AuctionObjectViewModel {
 
     private String author;
     private Year painted;
@@ -19,11 +11,9 @@ public class Art extends AuctionObject {
     private Integer height;
     private String description;
 
-    public Art() {
+    public ArtViewModel() {
     }
 
-    @Size(min = 2, message = "The name must be at least to 2 characters.")
-    @Column(name = "author")
     public String getAuthor() {
         return author;
     }
@@ -32,8 +22,6 @@ public class Art extends AuctionObject {
         this.author = author;
     }
 
-    @Column(name = "painted")
-    @Convert(converter = YearAttributeConverter.class)
     public Year getPainted() {
         return painted;
     }
@@ -42,7 +30,6 @@ public class Art extends AuctionObject {
         this.painted = painted;
     }
 
-    @Column(name = "width", nullable = false)
     public Integer getWidth() {
         return width;
     }
@@ -51,7 +38,6 @@ public class Art extends AuctionObject {
         this.width = width;
     }
 
-    @Column(name = "height", nullable = false)
     public Integer getHeight() {
         return height;
     }
@@ -60,8 +46,6 @@ public class Art extends AuctionObject {
         this.height = height;
     }
 
-    @Size(min = 10, message = "Description must be at least to 10 characters.")
-    @Column(name = "description", columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }

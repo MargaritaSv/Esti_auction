@@ -1,29 +1,31 @@
-package org.com.esti.models.binding;
+package org.com.esti.models.view;
 
 import org.com.esti.domain.entities.UserPersonal;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class AuctionObjectAddBindingModel {
-
+public abstract class AuctionObjectViewModel {
+    private Long id;
     private String name;
-    private MultipartFile imageUrl;
+    private String imageUrl;
     private BigDecimal estimateTo;
     private BigDecimal estimateFrom;
     private UserPersonal estimatedBy;
     private Date createdAt;
     private Date updatedAt;
 
-    public AuctionObjectAddBindingModel() {
+    public AuctionObjectViewModel() {
     }
 
-    @NotEmpty
-    @NotNull(message = "Name is required")
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -32,15 +34,14 @@ public class AuctionObjectAddBindingModel {
         this.name = name;
     }
 
-    public MultipartFile getImageUrl() {
+    public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(MultipartFile imageUrl) {
+    public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 
-    @Positive(message = "Price must be positive number")
     public BigDecimal getEstimateTo() {
         return estimateTo;
     }
@@ -49,8 +50,6 @@ public class AuctionObjectAddBindingModel {
         this.estimateTo = estimateTo;
     }
 
-    @NotNull
-    @Positive(message = "Price must be positive number")
     public BigDecimal getEstimateFrom() {
         return estimateFrom;
     }

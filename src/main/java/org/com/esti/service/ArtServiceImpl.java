@@ -7,6 +7,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ArtServiceImpl implements ArtService {
     private final ArtRepository artRepository;
@@ -32,5 +35,13 @@ public class ArtServiceImpl implements ArtService {
             ex.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public List<ArtServiceModel> findAll() {
+        return this.artRepository.findAll()
+                .stream()
+                .map(a -> this.modelMapper.map(a, ArtServiceModel.class))
+                .collect(Collectors.toList());
     }
 }

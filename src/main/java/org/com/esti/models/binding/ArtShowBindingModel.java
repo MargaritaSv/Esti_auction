@@ -1,16 +1,16 @@
-package org.com.esti.models.service;
+package org.com.esti.models.binding;
 
 import java.time.LocalDate;
-import java.time.Year;
 
-public class ArtServiceModel extends AuctionObjectServiceModel {
+public class ArtShowBindingModel extends AuctionObjectAddBindingModel {
     private String author;
-    private Year painted;
+    private LocalDate painted;
     private Integer width;
     private Integer height;
     private String description;
 
-    public ArtServiceModel() {
+
+    public ArtShowBindingModel() {
     }
 
     public String getAuthor() {
@@ -21,11 +21,11 @@ public class ArtServiceModel extends AuctionObjectServiceModel {
         this.author = author;
     }
 
-    public Year getPainted() {
+    public LocalDate getPainted() {
         return painted;
     }
 
-    public void setPainted(Year painted) {
+    public void setPainted(LocalDate painted) {
         this.painted = painted;
     }
 

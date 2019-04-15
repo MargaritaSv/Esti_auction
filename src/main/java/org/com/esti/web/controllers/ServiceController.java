@@ -50,13 +50,17 @@ public class ServiceController extends BaseController {
         UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();
         bindingModel.setEstimatedBy(userPersonal);
 
-        ArtServiceModel artServiceModel = new ArtServiceModel();
+        ArtServiceModel artServiceModel = this.modelMapper.map(bindingModel, ArtServiceModel.class);
         artServiceModel.setImageUrl(this.cloudinarySErvice.uploadImages(bindingModel.getImageUrl()));
-        artServiceModel = this.artService.add(this.modelMapper.map(bindingModel, ArtServiceModel.class));
+
+        artServiceModel = this.artService.add(artServiceModel);
 
         if (artServiceModel == null) {
             throw new IllegalArgumentException("Something went wrong!");
         }
-        return super.redirect("/");
+
+        //TODO: msg save success flush
+       // return super.view("services/add_art", bindingModel);
+          return super.redirect("/");
     }
 }

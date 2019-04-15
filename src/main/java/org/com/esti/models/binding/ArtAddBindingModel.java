@@ -6,12 +6,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.time.Year;
 
 public class ArtAddBindingModel extends AuctionObjectAddBindingModel {
     private String author;
-    private LocalDate paintedTo;
-    private LocalDate paintedFrom;
+    private Year painted;
     private Integer width;
     private Integer height;
     private String description;
@@ -19,6 +18,7 @@ public class ArtAddBindingModel extends AuctionObjectAddBindingModel {
     public ArtAddBindingModel() {
     }
 
+    //  @Min(value = 2, message = "The name must be at least to 2 characters.")
     public String getAuthor() {
         return author;
     }
@@ -27,28 +27,18 @@ public class ArtAddBindingModel extends AuctionObjectAddBindingModel {
         this.author = author;
     }
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    public LocalDate getPaintedTo() {
-        return paintedTo;
+    //    @DateTimeFormat(iso = DateTimeFormat.ISO.NONE, pattern = "yyyy")
+//    @JsonFormat(pattern = "yyyy")
+    public Year getPainted() {
+        return painted;
     }
 
-    public void setPaintedTo(LocalDate paintedTo) {
-        this.paintedTo = paintedTo;
-    }
-
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    public LocalDate getPaintedFrom() {
-        return paintedFrom;
-    }
-
-    public void setPaintedFrom(LocalDate paintedFrom) {
-        this.paintedFrom = paintedFrom;
+    public void setPainted(Year painted) {
+        this.painted = painted;
     }
 
     @NotNull
-    @Min(value = 5, message = "Width must be at least 5sm.")
+    @Min(value = 5, message = "Width must be at least 5cm.")
     public Integer getWidth() {
         return width;
     }
@@ -58,7 +48,7 @@ public class ArtAddBindingModel extends AuctionObjectAddBindingModel {
     }
 
     @NotNull
-    @Min(value = 5, message = "Height must be at least 5sm.")
+    @Min(value = 5, message = "Height must be at least 5cm.")
     public Integer getHeight() {
         return height;
     }
