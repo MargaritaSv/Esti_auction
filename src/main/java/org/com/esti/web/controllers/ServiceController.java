@@ -78,4 +78,11 @@ public class ServiceController extends BaseController {
         return super.redirect("/");
     }
 
+    @GetMapping("art/delete/{id}")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    public ModelAndView deleteArt(@PathVariable Long id) throws Exception {
+        this.artService.deleteArt(id);
+        return super.redirect("/department/art");
+    }
+
 }

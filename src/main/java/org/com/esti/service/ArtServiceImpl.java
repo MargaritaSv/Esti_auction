@@ -68,4 +68,13 @@ public class ArtServiceImpl implements ArtService {
         //TODO:estimatedBy
         return this.modelMapper.map(this.artRepository.save(art), ArtServiceModel.class);
     }
+
+    @Override
+    public void deleteArt(Long id) throws Exception {
+        try {
+            this.artRepository.deleteById(id);
+        }catch (Exception ex){
+            throw new Exception("Canvas isn't exist.");
+        }
+    }
 }

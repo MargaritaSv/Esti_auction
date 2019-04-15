@@ -35,7 +35,11 @@
                     <button type="submit" class="text-center btn btn-info" style="margin-top: 95%">BIT</button>
                 </div>
                 <div>
-                    <a class="btn btn-light" th:href="@{/service/art/edit/{id}(id=${canvas.id})}">EDIT</a></div>
+                    <a class="btn btn-light" th:href="@{/service/art/edit/{id}(id=${canvas.id})}">EDIT</a>
+                </div>
+                <div>
+                    <a class="btn btn-light" th:href="@{/service/art/delete/{id}(id=${canvas.id})}">DELETE</a>
+                </div>
             </div>
         </th:block>
     </div>

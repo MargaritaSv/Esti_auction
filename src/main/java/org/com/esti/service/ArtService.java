@@ -12,4 +12,6 @@ public interface ArtService {
     ArtServiceModel findProductById(Long id);
 
     ArtServiceModel editProduct(Long id, ArtServiceModel artServiceModel);
+
+    void deleteArt(Long id) throws Exception;
 }
