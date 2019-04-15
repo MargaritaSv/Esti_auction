@@ -11,36 +11,40 @@
                 <div class="auction-imageUrl" style="float: left; width: 30%;">
                     <!--<a class="imageUrl-capture" href="#">-->
                     <div class="text-center">
-                        <img th:src="${canvas.imageUrl}"  alt="canvas">
+                        <img th:src="${canvas.imageUrl}" alt="canvas">
 
                     </div>
                     <!--</a>-->
                 </div>
-                <div style="width: 50%; float: left; padding: 3%">
-                    <div class="auction-details" style="float: left;">
+                <div style="width: 50%; padding: 3%">
+                    <div class="auction-details">
                         <h4 th:text="${canvas.name}"></h4>
-                        <br>
                         from <p th:text="${canvas.author}"></p>
                     </div>
-                    <div class="estimate">
-                        <div class="left-section" style="float: left;position: relative">
-                            Estimate:
-                            <span th:text="${canvas.estimateFrom}"></span>
-                            -
-                            <span th:text="${canvas.estimateTo}"></span>
-                        </div>
+                    <div class="left-section" style="float: left;position: relative">
+                        Estimate:
+                        <span th:text="${canvas.estimateFrom}"></span>
+                        -
+                        <span th:text="${canvas.estimateTo}"></span>
                     </div>
                 </div>
-                <div>
-                    <button type="submit" class="text-center btn btn-info" style="margin-top: 95%">BIT</button>
+                <div class="btn-options">
+                    <div>
+                        <a class="btn btn-light" style="margin-top: 23%;width: 100%">BIT</a>
+                    </div>
+                    <div style="margin-top: 12%">
+                        <a class="btn btn-light" style="width: 100%"
+                           th:href="@{/service/art/edit/{id}(id=${canvas.id})}">EDIT</a>
+                    </div>
+                    <div style="margin-top: 12%">
+                        <a class="btn btn-light" style="width: 100%"
+                           th:href="@{/service/art/delete/{id}(id=${canvas.id})}">DELETE</a>
+                    </div>
                 </div>
-                <div>
-                    <a class="btn btn-light" th:href="@{/service/art/edit/{id}(id=${canvas.id})}">EDIT</a>
-                </div>
-                <div>
-                    <a class="btn btn-light" th:href="@{/service/art/delete/{id}(id=${canvas.id})}">DELETE</a>
-                </div>
+
             </div>
         </th:block>
     </div>
 </section>
+
+<!--TODO: separated class styl divs btns-->
