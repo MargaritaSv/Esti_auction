@@ -1,0 +1,71 @@
+<section id="main-head" class="canvas">
+</section>
+<div class="container-fluid mt-3">
+    <div class="text-intro">
+        <h2> Add Art</h2>
+    </div>
+    <hr class="bg-resev hr-2"/>
+    <form class="w-50 mx-auto" enctype="multipart/form-data" th:method="post" th:action="@{/service/art/edit/{id}(id=${id})}"
+          th:object="${viewModel}">
+        <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'text-danger'">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" name="name" th:value="${name}">
+            <small th:each="error : ${#fields.errors('name')}" th:text="${error}"></small>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('author')}? 'text-danger'">
+            <label for="author">Author</label>
+            <input type="text" class="form-control text-input" th:field="*{author}" id="author" name="author" th:value="${author}">
+            <small th:each="error : ${#fields.errors('author')}" th:text="${error}"></small>
+        </div>
+
+        <!--<div class="form-group">-->
+            <!--<label class="col-sm-2 col-form-label" for="art-imageUrl">Image</label>-->
+            <!--<input type="file" id="art-imageUrl" class="form-control" name="imageUrl"/>-->
+        <!--</div>-->
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('description')}? 'text-danger'">
+            <label for="description">Description</label>
+            <textarea type="text" class="form-control text-input" th:field="*{description}" id="description"
+                      name="description" th:text="${description}">
+            </textarea>
+            <small th:each="error : ${#fields.errors('description')}" th:text="${error}"></small>
+        </div>
+
+        <div class=" form-group" th:classappend="${#fields.hasErrors('painted')}? 'text-danger'">
+            <label for="painted" class="col-sm-2 col-form-label">Painted</label>
+            <input type="date" class="form-control" id="painted" th:field="*{painted}" name="painted"
+                   placeholder="yyyy" th:value="${painted}">
+            <small th:each="error : ${#fields.errors('painted')}" th:text="${error}"></small>
+        </div>
+
+        <div class=" form-group" th:classappend="${#fields.hasErrors('width')}? 'text-danger'">
+            <label for="width" class="col-sm-2 col-form-label">Width</label>
+            <input type="number" class="form-control" id="width" th:field="*{width}" name="width" th:value="${width}">
+            <small th:each="error : ${#fields.errors('width')}" th:text="${error}"></small>
+        </div>
+
+        <div class=" form-group" th:classappend="${#fields.hasErrors('height')}? 'text-danger'">
+            <label for="height" class="col-sm-2 col-form-label">Height</label>
+            <input type="number" class="form-control" id="height" th:field="*{height}" name="height" th:value="${height}">
+            <small th:each="error : ${#fields.errors('height')}" th:text="${error}"></small>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('estimateTo')}? 'text-danger'">
+            <label for="estimateTo">Price to</label>
+            <input type="number" class="form-control text-input" th:field="*{estimateTo}" id="estimateTo"
+                   name="estimateTo" th:value="${estimateTo}">
+            <small th:each="error : ${#fields.errors('estimateTo')}" th:text="${error}"></small>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('estimateFrom')}? 'text-danger'">
+            <label for="estimateFrom">Price from</label>
+            <input type="number" class="form-control text-input" th:field="*{estimateFrom}" id="estimateFrom"
+                   name="estimateFrom" th:value="${estimateFrom}">
+            <small th:each="error : ${#fields.errors('estimateFrom')}" th:text="${error}"></small>
+        </div>
+
+        <div class="col-md-12 text-center">
+            <button class="btn btn-info">SUBMIT</button>
+        </div>
+    </form>
+</div>

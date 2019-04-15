@@ -8,4 +8,8 @@ public interface ArtService {
     ArtServiceModel add(ArtServiceModel artServiceModel);
 
     List<ArtServiceModel> findAll();
+
+    ArtServiceModel findProductById(Long id);
+
+    ArtServiceModel editProduct(Long id, ArtServiceModel artServiceModel);
 }

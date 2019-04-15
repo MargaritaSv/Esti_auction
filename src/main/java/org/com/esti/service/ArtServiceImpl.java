@@ -44,4 +44,28 @@ public class ArtServiceImpl implements ArtService {
                 .map(a -> this.modelMapper.map(a, ArtServiceModel.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public ArtServiceModel findProductById(Long id) {
+        return this.artRepository.findById(id)
+                .map(a -> this.modelMapper.map(a, ArtServiceModel.class))
+                .orElseThrow(() -> new IllegalArgumentException("Canvas isn't exist."));
+    }
+
+    @Override
+    public ArtServiceModel editProduct(Long id, ArtServiceModel artServiceModel) {
+        Art art = this.artRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Canvas isn't exist."));
+
+        art.setAuthor(artServiceModel.getAuthor());
+        art.setDescription(artServiceModel.getDescription());
+        art.setHeight(artServiceModel.getHeight());
+        art.setWidth(artServiceModel.getWidth());
+        art.setPainted(artServiceModel.getPainted());
+        art.setEstimateFrom(artServiceModel.getEstimateFrom());
+        art.setEstimateFrom(artServiceModel.getEstimateTo());
+        art.setImageUrl(artServiceModel.getImageUrl());
+
+        //TODO:estimatedBy
+        return this.modelMapper.map(this.artRepository.save(art), ArtServiceModel.class);
+    }
 }

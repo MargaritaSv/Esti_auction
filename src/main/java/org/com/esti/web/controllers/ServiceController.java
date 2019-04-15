@@ -8,13 +8,11 @@ import org.com.esti.service.ArtService;
 import org.com.esti.service.CloudinaryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -41,6 +39,7 @@ public class ServiceController extends BaseController {
     }
 
     @PostMapping("/art")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView addArtConfirm(@Valid @ModelAttribute("viewModel") ArtAddBindingModel bindingModel, BindingResult bindingResult, Authentication authentication) throws IOException {
 
         if (bindingResult.hasErrors()) {
@@ -60,7 +59,23 @@ public class ServiceController extends BaseController {
         }
 
         //TODO: msg save success flush
-       // return super.view("services/add_art", bindingModel);
-          return super.redirect("/");
+        // return super.view("services/add_art", bindingModel);
+        return super.redirect("/");
     }
+
+    @GetMapping("art/edit/{id}")
+    public ModelAndView aditArt(@PathVariable Long id) {
+        ArtServiceModel artServiceModel = this.artService.findProductById(id);
+        return this.view("services/edit_art", artServiceModel);
+    }
+
+    @PostMapping("art/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    public ModelAndView aditArtConfirm(@PathVariable Long id, @ModelAttribute ArtAddBindingModel bindingModel) {
+        this.artService.editProduct(id, this.modelMapper.map(bindingModel, ArtServiceModel.class));
+
+//    TODO: redirect to  -> return super.redirect("/art/details/" + id);
+        return super.redirect("/");
+    }
+
 }
