@@ -54,7 +54,7 @@ public class UserController extends BaseController {
         return super.redirect("/user/login");
     }
 
-    @GetMapping("/edit")
+    @GetMapping("/edit/")
     @PreAuthorize("isAuthenticated()")
     public ModelAndView editProfile(Principal principal, ModelAndView modelAndView) {
         modelAndView.addObject("model",
@@ -65,7 +65,7 @@ public class UserController extends BaseController {
 
     @PatchMapping("/edit")
     @PreAuthorize("isAuthenticated()")
-    public ModelAndView editProfileConfirm(@ModelAttribute UserEditBindingModel bindingModel) {
+    public ModelAndView editProfileConfirm(@PathVariable Long id,@ModelAttribute UserEditBindingModel bindingModel) {
         if (bindingModel.getPassword().equals(bindingModel.getConfirmPassword())) {
             this.userService.editUserProfile(this.modelMapper.map(bindingModel, UserServiceModel.class), bindingModel.getOldPassword());
 

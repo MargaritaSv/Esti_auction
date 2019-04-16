@@ -9,29 +9,39 @@
             <!--<div style="width: 100%;position: relative ">-->
             <div class="row mt-3">
                 <div class="auction-imageUrl" style="float: left; width: 30%;">
-                    <a class="imageUrl-capture" href="#">
-                        <img th:src="@{/images/wine_cover.jpg}">
-                    </a>
+                    <!--<a class="imageUrl-capture" href="#">-->
+                    <div class="text-center">
+                        <img th:src="${wine.imageUrl}" alt="wine">
+
+                    </div>
+                    <!--</a>-->
                 </div>
-                <div style="width: 50%; float: left; padding: 3%">
-                    <div class="auction-details" style="float: left;">
+                <div style="width: 50%; padding: 3%">
+                    <div class="auction-details">
                         <h4 th:text="${wine.collection}"></h4>
-                        <p th:text="${wine.name}"></p>
+                        from <p th:text="${wine.name}"></p>
                     </div>
-                    <div class="estimate">
-                        <div class="left-section" style="float: left;position: relative">
-                            Estimate:
-                            <span th:text="${wine.estimateFrom}"></span>
-                            -
-                            <span th:text="${wine.estimateTo}"></span>
-                        </div>
+                    <div class="left-section" style="float: left;position: relative">
+                        Estimate:
+                        <span th:text="${wine.estimateFrom}"></span>
+                        -
+                        <span th:text="${wine.estimateTo}"></span>
                     </div>
                 </div>
-                <div>
-                    <button type="submit" class="text-center btn btn-info" style="margin-top: 95%">BIT</button>
+                <div class="btn-options">
+                    <div>
+                        <a class="btn btn-light" style="margin-top: 23%;width: 100%">BIT</a>
+                    </div>
+                    <div style="margin-top: 12%">
+                        <a class="btn btn-light" style="width: 100%"
+                           th:href="@{/service/wine/edit/{id}(id=${wine.id})}">EDIT</a>
+                    </div>
+                    <div style="margin-top: 12%">
+                        <a class="btn btn-light" style="width: 100%"
+                           th:href="@{/service/wine/delete/{id}(id=${wine.id})}">DELETE</a>
+                    </div>
                 </div>
-                <div>
-                    <a class="btn btn-light" th:href="@{/service/wine/edit/{id}(id=${wine.id})}">EDIT</a></div>
+
             </div>
         </th:block>
     </div>
