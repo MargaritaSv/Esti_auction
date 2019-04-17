@@ -6,6 +6,8 @@ import org.com.esti.models.binding.ArtAddBindingModel;
 import org.com.esti.models.service.ArtServiceModel;
 import org.com.esti.service.ArtService;
 import org.com.esti.service.CloudinaryService;
+import org.com.esti.service.WatchService;
+import org.com.esti.service.WineService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,12 +25,16 @@ import java.io.IOException;
 public class ServiceController extends BaseController {
 
     private final ArtService artService;
+    private final WineService wineService;
+    private final WatchService watchService;
     private final ModelMapper modelMapper;
     private final CloudinaryService cloudinarySErvice;
 
     @Autowired
-    public ServiceController(ArtService artService, ModelMapper modelMapper, CloudinaryService cloudinarySErvice) {
+    public ServiceController(ArtService artService, WineService wineService, WatchService watchService, ModelMapper modelMapper, CloudinaryService cloudinarySErvice) {
         this.artService = artService;
+        this.wineService = wineService;
+        this.watchService = watchService;
         this.modelMapper = modelMapper;
         this.cloudinarySErvice = cloudinarySErvice;
     }

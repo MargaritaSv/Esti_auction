@@ -1,15 +1,10 @@
-package org.com.esti.domain.entities;
+package org.com.esti.models.service;
 
 import org.com.esti.domain.entities.enums.Closure;
 import org.com.esti.domain.entities.enums.Dial;
 import org.com.esti.domain.entities.enums.WatchCollection;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-
-@Entity
-@Table(name = "watch")
-public class Watch extends AuctionObject {
+public class WatchServiceModel extends AuctionObjectServiceModel {
 
     private Dial dial;
     private String caliber;
@@ -18,11 +13,9 @@ public class Watch extends AuctionObject {
     private Integer dimensions;
     private WatchCollection collection;
 
-    public Watch() {
+    public WatchServiceModel() {
     }
 
-    @Column(name = "dial", nullable = false)
-    @Enumerated(EnumType.STRING)
     public Dial getDial() {
         return dial;
     }
@@ -31,7 +24,6 @@ public class Watch extends AuctionObject {
         this.dial = dial;
     }
 
-    @Column(name = "caliber")
     public String getCaliber() {
         return caliber;
     }
@@ -40,7 +32,6 @@ public class Watch extends AuctionObject {
         this.caliber = caliber;
     }
 
-    @Column(name = "watch_case")
     public String getWatchCase() {
         return watchCase;
     }
@@ -49,8 +40,6 @@ public class Watch extends AuctionObject {
         this.watchCase = watchCase;
     }
 
-    @Column(name = "closure", nullable = false)
-    @Enumerated(EnumType.STRING)
     public Closure getClosure() {
         return closure;
     }
@@ -59,8 +48,6 @@ public class Watch extends AuctionObject {
         this.closure = closure;
     }
 
-    @Column(name = "dimentions", nullable = false)
-    @Min(10)
     public Integer getDimensions() {
         return dimensions;
     }
@@ -69,8 +56,6 @@ public class Watch extends AuctionObject {
         this.dimensions = dimensions;
     }
 
-    @Column(name = "collection")
-    @Enumerated(EnumType.STRING)
     public WatchCollection getCollection() {
         return collection;
     }
@@ -78,5 +63,4 @@ public class Watch extends AuctionObject {
     public void setCollection(WatchCollection collection) {
         this.collection = collection;
     }
-
 }

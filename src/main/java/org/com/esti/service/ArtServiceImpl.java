@@ -49,12 +49,13 @@ public class ArtServiceImpl implements ArtService {
     public ArtServiceModel findProductById(Long id) {
         return this.artRepository.findById(id)
                 .map(a -> this.modelMapper.map(a, ArtServiceModel.class))
-                .orElseThrow(() -> new IllegalArgumentException("Canvas isn't exist."));
+                .orElseThrow(() -> new IllegalArgumentException("Canvas isn't found."));
     }
 
     @Override
     public ArtServiceModel editProduct(Long id, ArtServiceModel artServiceModel) {
-        Art art = this.artRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Canvas isn't exist."));
+        Art art = this.artRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Canvas isn't exist."));
 
         art.setAuthor(artServiceModel.getAuthor());
         art.setDescription(artServiceModel.getDescription());
