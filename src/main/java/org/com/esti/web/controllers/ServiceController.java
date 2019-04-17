@@ -45,7 +45,7 @@ public class ServiceController extends BaseController {
 
     @GetMapping("/art")
     public ModelAndView addArt(@ModelAttribute("viewModel") ArtAddBindingModel bindingModel) {
-        return super.view("services/add_wine", bindingModel);
+        return super.view("services/add_art", bindingModel);
     }
 
     @PostMapping("/art")
@@ -53,7 +53,7 @@ public class ServiceController extends BaseController {
     public ModelAndView addArtConfirm(@Valid @ModelAttribute("viewModel") ArtAddBindingModel bindingModel, BindingResult bindingResult, Authentication authentication) throws IOException {
 
         if (bindingResult.hasErrors()) {
-            return super.view("services/add_wine", bindingModel);
+            return super.view("services/add_arte", bindingModel);
         }
 
         UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();
@@ -73,13 +73,13 @@ public class ServiceController extends BaseController {
         return super.redirect("/");
     }
 
-    @GetMapping("art/edit/{id}")
+    @GetMapping("/art/edit/{id}")
     public ModelAndView aditArt(@PathVariable Long id) {
         ArtServiceModel artServiceModel = this.artService.findProductById(id);
         return this.view("services/edit_art", artServiceModel);
     }
 
-    @PostMapping("art/edit/{id}")
+    @PostMapping("/art/edit/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView aditArtConfirm(@PathVariable Long id, @ModelAttribute ArtAddBindingModel bindingModel) {
         this.artService.editProduct(id, this.modelMapper.map(bindingModel, ArtServiceModel.class));
@@ -88,7 +88,7 @@ public class ServiceController extends BaseController {
         return super.redirect("/");
     }
 
-    @GetMapping("art/delete/{id}")
+    @GetMapping("/art/delete/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView deleteArt(@PathVariable Long id) throws Exception {
         this.artService.deleteArt(id);
@@ -127,13 +127,13 @@ public class ServiceController extends BaseController {
         return super.redirect("/");
     }
 
-    @GetMapping("wine/edit/{id}")
+    @GetMapping("/wine/edit/{id}")
     public ModelAndView aditWine(@PathVariable Long id) {
         WineServiceModel wineServiceModel = this.wineService.findProductById(id);
         return this.view("services/edit_wine", wineServiceModel);
     }
 
-    @PostMapping("wine/edit/{id}")
+    @PostMapping("/wine/edit/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView aditWineConfirm(@PathVariable Long id, @ModelAttribute WineServiceModel bindingModel) {
         this.wineService.editWine(id, this.modelMapper.map(bindingModel, WineServiceModel.class));
@@ -142,7 +142,7 @@ public class ServiceController extends BaseController {
         return super.redirect("/");
     }
 
-    @GetMapping("wine/delete/{id}")
+    @GetMapping("/wine/delete/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView deleteWine(@PathVariable Long id) throws Exception {
         this.wineService.deleteWine(id);
@@ -152,7 +152,7 @@ public class ServiceController extends BaseController {
 
     @GetMapping("/watch")
     public ModelAndView addArt(@ModelAttribute("viewModel") WatchAddBindingModel bindingModel) {
-        return super.view("services/add_wine", bindingModel);
+        return super.view("services/add_watch", bindingModel);
     }
 
     @PostMapping("/watch")
@@ -160,7 +160,7 @@ public class ServiceController extends BaseController {
     public ModelAndView addArtConfirm(@Valid @ModelAttribute("viewModel") WatchAddBindingModel bindingModel, BindingResult bindingResult, Authentication authentication) throws IOException {
 
         if (bindingResult.hasErrors()) {
-            return super.view("services/add_wine", bindingModel);
+            return super.view("services/add_watch", bindingModel);
         }
 
         UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();
@@ -180,13 +180,13 @@ public class ServiceController extends BaseController {
         return super.redirect("/");
     }
 
-    @GetMapping("watch/edit/{id}")
+    @GetMapping("/watch/edit/{id}")
     public ModelAndView aditWatch(@PathVariable Long id) {
         WatchServiceModel watchServiceModel = this.watchService.findProductById(id);
         return this.view("services/edit_watch", watchServiceModel);
     }
 
-    @PostMapping("watch/edit/{id}")
+    @PostMapping("/watch/edit/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView aditWatchConfirm(@PathVariable Long id, @ModelAttribute WatchAddBindingModel bindingModel) {
         this.watchService.editProduct(id, this.modelMapper.map(bindingModel, WatchServiceModel.class));
@@ -195,7 +195,7 @@ public class ServiceController extends BaseController {
         return super.redirect("/");
     }
 
-    @GetMapping("watch/delete/{id}")
+    @GetMapping("/watch/delete/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView deleteWatch(@PathVariable Long id) throws Exception {
         this.watchService.deleteWatch(id);

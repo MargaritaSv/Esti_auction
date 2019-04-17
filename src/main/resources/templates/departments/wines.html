@@ -32,17 +32,21 @@
                     <div>
                         <a class="btn btn-light" style="margin-top: 23%;width: 100%">BIT</a>
                     </div>
-                    <div style="margin-top: 12%">
-                        <a class="btn btn-light" style="width: 100%"
-                           th:href="@{/service/wine/edit/{id}(id=${wine.id})}">EDIT</a>
-                    </div>
-                    <div style="margin-top: 12%">
-                        <a class="btn btn-light" style="width: 100%"
-                           th:href="@{/service/wine/delete/{id}(id=${wine.id})}">DELETE</a>
-                    </div>
+                    <th:block sec:authorize="hasRole('ROLE_MODERATOR')">
+                        <div style="margin-top: 12%">
+                            <a class="btn btn-light" style="width: 100%"
+                               th:href="@{/service/art/edit/{id}(id=${wine.id})}">EDIT</a>
+                        </div>
+                        <div style="margin-top: 12%">
+                            <a class="btn btn-light" style="width: 100%"
+                               th:href="@{/service/art/delete/{id}(id=${wine.id})}">DELETE</a>
+                        </div>
+                    </th:block>
                 </div>
 
             </div>
         </th:block>
     </div>
 </section>
+
+<!--TODO: separated class styl divs btns-->

@@ -6,10 +6,10 @@
 </section>
 <div class="container-fluid mt-3">
     <div class="text-intro">
-        <h2>𝒜𝒹𝒹 𝓌𝒶𝓉𝒸𝒽</h2>
+        <h2>𝒜𝒹𝒹 wine</h2>
     </div>
     <hr class="bg-resev hr-2"/>
-    <form class="w-50 mx-auto" th:method="post" th:action="@{/service/watch}" th:object="${viewModel}">
+    <form class="w-50 mx-auto" enctype="multipart/form-data" th:method="post" th:action="@{/service/watch}" th:object="${viewModel}">
         <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'text-danger'">
             <label for="name" class="col-sm-2 col-form-label">Name</label>
             <input type="text" class="form-control" id="name" th:field="*{name}" name="name">
@@ -18,12 +18,16 @@
         <div class="form-group" th:classappend="${#fields.hasErrors('dial')}? 'text-danger'">
             <label for="dial">Dial</label>
             <select class="form-control" id="dial" th:field="*{dial}" name="dial">
-                <option th:value="" th:text="Избери" selected></option>
+                <!--<option th:value="" th:text="Избери" selected></option>-->
                 <option th:each=" dial: ${T(org.com.esti.domain.entities.enums.Dial).values()}"
                         th:value="${dial}" th:text="${dial}">
                 </option>
             </select>
             <small th:each="error : ${#fields.errors('dial')}" th:text="${error}"></small>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label" for="art-imageUrl">Image</label>
+            <input type="file" id="art-imageUrl" class="form-control" name="imageUrl"/>
         </div>
         <div class="form-group" th:classappend="${#fields.hasErrors('caliber')}? 'text-danger'">
             <label for="caliber" class="col-sm-2 col-form-label">Caliber</label>
@@ -38,7 +42,7 @@
         <div class="form-group" th:classappend="${#fields.hasErrors('closure')}? 'text-danger'">
             <label for="closure">Closure</label>
             <select class="form-control" id="closure" th:field="*{closure}" name="closure">
-                <option th:each=" closure: ${T(org.com.esti.domain.entities.enums.WatchCollection).values()}"
+                <option th:each=" closure: ${T(org.com.esti.domain.entities.enums.Closure).values()}"
                         th:value="${closure}" th:text="${closure}">
                 </option>
             </select>

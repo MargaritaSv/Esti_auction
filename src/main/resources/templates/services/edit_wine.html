@@ -5,7 +5,7 @@
         <h2> Edit Watch</h2>
     </div>
     <hr class="bg-resev hr-2"/>
-    <form class="w-50 mx-auto" th:method="post" th:action="@{/service/art/edit/{id}(id=${id})}"
+    <form class="w-50 mx-auto" enctype="multipart/form-data" th:method="post" th:action="@{/service/art/edit/{id}(id=${id})}"
           th:object="${viewModel}">
         <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'text-danger'">
             <label for="name">Name</label>
@@ -24,7 +24,7 @@
             <label for="collection">Collection</label>
             <select class="form-control" id="collection" th:fields="*{collection}" name="collection">
                 <option disabled="true" selected="selected" value="">Select</option>
-                <option th:each="collection : ${T(org.softuni.auction_esti.domain.entities.enums.WineCollections).values()}"
+                <option th:each="collection : ${T(org.com.esti.domain.entities.enums.WineCollections).values()}"
                         th:value="${collection}" th:text="${collection}"></option>
             </select>
             <small th:each="error : ${#fields.errors('collection')}" th:text="${error}"></small>

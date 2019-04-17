@@ -3,6 +3,7 @@ package org.com.esti.models.binding;
 import org.com.esti.domain.entities.enums.WineCollections;
 
 public class WineAddBindingModel extends AuctionObjectAddBindingModel {
+
     private WineCollections collection;
     private Integer numberOfBottles;
 
