@@ -3,6 +3,9 @@ package org.com.esti.domain.entities;
 import org.com.esti.domain.entities.enums.Gender;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -25,7 +28,8 @@ public class UserPersonal extends BaseEntity {
     public UserPersonal() {
     }
 
-   // @Size(max = 65, message = "Name is too long")
+    @Min(2)
+    @Max(65)
     @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
@@ -35,7 +39,8 @@ public class UserPersonal extends BaseEntity {
         this.firstName = firstName;
     }
 
-   // @Size(max = 65, message = "Name is too long")
+    @Min(2)
+    @Max(65)
     @Column(name = "middle_name")
     public String getMiddleName() {
         return middleName;
@@ -45,13 +50,13 @@ public class UserPersonal extends BaseEntity {
         this.middleName = middleName;
     }
 
-  //  @Size(max = 65, message = "Name is too long")
+    @Min(2)
+    @Max(65)
     @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }
 
- //   @Size(max = 65, message = "Name is too long")
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -102,6 +107,7 @@ public class UserPersonal extends BaseEntity {
         this.country = country;
     }
 
+    @Pattern(regexp = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,64}")
     @Column(name = "email", unique = true)
     public String getEmail() {
         return email;

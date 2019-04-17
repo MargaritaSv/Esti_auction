@@ -43,6 +43,7 @@ public class Art extends AuctionObject {
     }
 
     @Column(name = "width", nullable = false)
+    @Size(min = 1, max = 600, message = "Cannot be empty, should be between 1 - 600 cm.")
     public Integer getWidth() {
         return width;
     }
@@ -52,6 +53,7 @@ public class Art extends AuctionObject {
     }
 
     @Column(name = "height", nullable = false)
+    @Size(min = 1, max = 600, message = "Cannot be empty, should be between 1 - 600 cm.")
     public Integer getHeight() {
         return height;
     }

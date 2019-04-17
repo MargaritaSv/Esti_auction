@@ -3,10 +3,13 @@ package org.com.esti.models.service;
 import org.com.esti.domain.entities.UserPersonal;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class AuctionObjectServiceModel {
+    protected static final String EMPTY = "Cannot be empty.";
+
     private Long id;
     private String name;
     private String imageUrl;
@@ -27,6 +30,7 @@ public class AuctionObjectServiceModel {
         this.id = id;
     }
 
+    @NotNull(message = EMPTY)
     public String getName() {
         return name;
     }
@@ -35,6 +39,7 @@ public class AuctionObjectServiceModel {
         this.name = name;
     }
 
+    @NotNull(message = EMPTY)
     public String getImageUrl() {
         return imageUrl;
     }
@@ -43,6 +48,7 @@ public class AuctionObjectServiceModel {
         this.imageUrl = imageUrl;
     }
 
+    @NotNull(message = EMPTY)
     public BigDecimal getEstimateTo() {
         return estimateTo;
     }
@@ -59,6 +65,7 @@ public class AuctionObjectServiceModel {
         this.estimateFrom = estimateFrom;
     }
 
+    @NotNull(message = EMPTY)
     public UserPersonal getEstimatedBy() {
         return estimatedBy;
     }

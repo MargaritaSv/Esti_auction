@@ -5,6 +5,7 @@ import org.com.esti.domain.entities.enums.Dial;
 import org.com.esti.domain.entities.enums.WatchCollection;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 @Entity
@@ -60,7 +61,8 @@ public class Watch extends AuctionObject {
     }
 
     @Column(name = "dimentions", nullable = false)
-    @Min(10)
+    @Min(200)
+    @Max(600)
     public Integer getDimensions() {
         return dimensions;
     }

@@ -33,6 +33,7 @@ public abstract class AuctionObject extends BaseEntity {
     public AuctionObject() {
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -41,8 +42,7 @@ public abstract class AuctionObject extends BaseEntity {
         this.name = name;
     }
 
-    @NotNull
-    @NotEmpty
+    @Column(name = "image_url", nullable = false)
     public String getImageUrl() {
         return imageUrl;
     }
@@ -51,6 +51,7 @@ public abstract class AuctionObject extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
+    @Column(name = "estimated_to")
     public BigDecimal getEstimateTo() {
         return estimateTo;
     }
@@ -59,6 +60,7 @@ public abstract class AuctionObject extends BaseEntity {
         this.estimateTo = estimateTo;
     }
 
+    @Column(name = "estimated_from")
     public BigDecimal getEstimateFrom() {
         return estimateFrom;
     }

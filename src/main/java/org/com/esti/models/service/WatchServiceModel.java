@@ -4,6 +4,9 @@ import org.com.esti.domain.entities.enums.Closure;
 import org.com.esti.domain.entities.enums.Dial;
 import org.com.esti.domain.entities.enums.WatchCollection;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 public class WatchServiceModel extends AuctionObjectServiceModel {
 
     private Dial dial;
@@ -48,6 +51,8 @@ public class WatchServiceModel extends AuctionObjectServiceModel {
         this.closure = closure;
     }
 
+    @Min(value = 200, message = "Dimension cannot be less than 200mm.")
+    @Max(value = 600, message = "Dimension cannot be greater than 600mm.")
     public Integer getDimensions() {
         return dimensions;
     }

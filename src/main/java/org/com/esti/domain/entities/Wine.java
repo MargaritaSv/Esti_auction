@@ -3,6 +3,8 @@ package org.com.esti.domain.entities;
 import org.com.esti.domain.entities.enums.WineCollections;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "wines")
@@ -25,6 +27,8 @@ public class Wine extends AuctionObject {
     }
 
     @Column(name = "number_of_bottles")
+    @Min(1)
+    @Max(500)
     public Integer getNumberOfBottles() {
         return numberOfBottles;
     }

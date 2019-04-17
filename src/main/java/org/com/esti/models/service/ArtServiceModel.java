@@ -1,5 +1,7 @@
 package org.com.esti.models.service;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.Year;
 
@@ -29,6 +31,8 @@ public class ArtServiceModel extends AuctionObjectServiceModel {
         this.painted = painted;
     }
 
+    @NotNull(message = EMPTY)
+    @Size(min = 5, max = 100, message = "Cannot be empty, should be between 5 and 100 symbols.")
     public Integer getWidth() {
         return width;
     }
@@ -37,6 +41,8 @@ public class ArtServiceModel extends AuctionObjectServiceModel {
         this.width = width;
     }
 
+    @NotNull(message = EMPTY)
+    @Size(min = 5, max = 100, message = "Cannot be empty, should be between 5 and 100 symbols.")
     public Integer getHeight() {
         return height;
     }

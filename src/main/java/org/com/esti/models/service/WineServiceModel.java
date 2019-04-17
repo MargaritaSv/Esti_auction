@@ -2,6 +2,9 @@ package org.com.esti.models.service;
 
 import org.com.esti.domain.entities.enums.WineCollections;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 public class WineServiceModel extends AuctionObjectServiceModel {
 
     private WineCollections collection;
@@ -18,6 +21,8 @@ public class WineServiceModel extends AuctionObjectServiceModel {
         this.collection = collection;
     }
 
+    @Min(value = 1, message = "Number  of bottles cannot be less than 1")
+    @Max(value = 500, message = "Number  of bottles cannot be greater than 500")
     public Integer getNumberOfBottles() {
         return numberOfBottles;
     }
