@@ -9,7 +9,7 @@
         <h2> Edit Watch</h2>
     </div>
     <hr class="bg-resev hr-2"/>
-    <form class="w-50 mx-auto" th:method="post" th:action="@{/service/watch/edit/{id}(id=${watch.id})}"
+    <form class="w-50 mx-auto" th:method="post" th:action="@{/service/watch/edit/{id}(id=${id})}"
           enctype="multipart/form-data" th:object="${viewModel}">
         <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'text-danger'">
             <label for="name" class="col-sm-2 col-form-label">Name</label>

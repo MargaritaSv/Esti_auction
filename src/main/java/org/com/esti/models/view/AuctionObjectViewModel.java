@@ -11,9 +11,7 @@ public abstract class AuctionObjectViewModel {
     private String imageUrl;
     private BigDecimal estimateTo;
     private BigDecimal estimateFrom;
-    private UserPersonal estimatedBy;
-    private Date createdAt;
-    private Date updatedAt;
+
 
     public AuctionObjectViewModel() {
     }
@@ -56,29 +54,5 @@ public abstract class AuctionObjectViewModel {
 
     public void setEstimateFrom(BigDecimal estimateFrom) {
         this.estimateFrom = estimateFrom;
-    }
-
-    public UserPersonal getEstimatedBy() {
-        return estimatedBy;
-    }
-
-    public void setEstimatedBy(UserPersonal estimatedBy) {
-        this.estimatedBy = estimatedBy;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }
