@@ -1,5 +1,7 @@
 package org.com.esti.config;
 
+import org.com.esti.models.binding.ArtAddBindingModel;
+import org.com.esti.models.service.ArtServiceModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,10 +24,10 @@ public class ApplicationBeanConfiguration implements WebMvcConfigurer {
         return new ModelMapper();
     }
 
-//    @Bean
-//    public Validator validator() {
-//        return Validation.buildDefaultValidatorFactory().getValidator();
-//    }
+    @Bean
+    public Validator validator() {
+        return Validation.buildDefaultValidatorFactory().getValidator();
+    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {

@@ -50,6 +50,7 @@ public class ServiceController extends BaseController {
         bindingModel.setEstimatedBy(userPersonal);
 
         ArtServiceModel artServiceModel = this.modelMapper.map(bindingModel, ArtServiceModel.class);
+        //tr da e v service-a
         artServiceModel.setImageUrl(this.cloudinarySErvice.uploadImages(bindingModel.getImageUrl()));
 
         artServiceModel = this.artService.add(artServiceModel);
