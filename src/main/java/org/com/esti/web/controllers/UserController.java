@@ -1,19 +1,19 @@
 package org.com.esti.web.controllers;
 
+import org.com.esti.domain.entities.User;
+import org.com.esti.domain.entities.UserPersonal;
 import org.com.esti.models.binding.UserEditBindingModel;
-import org.com.esti.models.binding.UserLoginBindingModel;
-import org.com.esti.models.view.UserProfileViewModel;
+import org.com.esti.models.service.UserPersonalServiceModel;
 import org.com.esti.models.binding.UserRegisterBindingModel;
 import org.com.esti.models.service.UserServiceModel;
 import org.com.esti.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.security.Principal;
 
 @Controller
 @RequestMapping("user")
@@ -53,25 +53,31 @@ public class UserController extends BaseController {
         return super.redirect("/user/login");
     }
 
-    @GetMapping("/edit/")
+    @GetMapping("/edit")
     @PreAuthorize("isAuthenticated()")
-    public ModelAndView editProfile(Principal principal, ModelAndView modelAndView) {
-        modelAndView.addObject("model",
-                this.modelMapper.map(this.userService.findUserByUserName(principal.getName()), UserProfileViewModel.class));
+    public ModelAndView editProfile(@ModelAttribute(name = "viewModel") UserEditBindingModel bindingModel, Authentication authentication) {
+          UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();
+        //    System.out.println("--------> " + authentication);
 
-        return super.view("edit_user", modelAndView);
+        UserPersonalServiceModel personalServiceModel = this.modelMapper.map(userPersonal, UserPersonalServiceModel.class);
+        return view("edit_user", personalServiceModel);
+//        modelAndView.addObject("model",
+//                this.modelMapper.map(this.userService.findUserByUserName(principal.getName()), UserProfileViewModel.class));
+//
+//        return super.view("edit_user", modelAndView);
     }
 
-    @PatchMapping("/edit")
+    @PostMapping("/edit/{id}")
     @PreAuthorize("isAuthenticated()")
-    public ModelAndView editProfileConfirm(@PathVariable Long id,@ModelAttribute UserEditBindingModel bindingModel) {
-        if (bindingModel.getPassword().equals(bindingModel.getConfirmPassword())) {
-            this.userService.editUserProfile(this.modelMapper.map(bindingModel, UserServiceModel.class), bindingModel.getOldPassword());
+    public ModelAndView editProfileConfirm(@PathVariable Long id, @ModelAttribute UserEditBindingModel bindingModel) {
+//        if (bindingModel.getPassword().equals(bindingModel.getConfirmPassword())) {
+//            this.userService.editUserPassword(this.modelMapper.map(bindingModel, UserServiceModel.class), bindingModel.getOldPassword());
+//
+//            return super.redirect("/user/profile");
+//        }
+        this.userService.editUserPersonal(id, this.modelMapper.map(bindingModel, UserPersonalServiceModel.class));
 
-            return super.redirect("/user/profile");
-        }
-
-        return super.view("edit_user");
+        return super.redirect("/");
 
     }
 }

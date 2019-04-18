@@ -6,7 +6,6 @@ import org.com.esti.domain.entities.enums.Gender;
 import java.time.LocalDate;
 
 public class UserPersonalServiceModel extends BaseServiceModel {
-    private Long id;
 
     private String firstName;
     private String middleName;
@@ -19,19 +18,17 @@ public class UserPersonalServiceModel extends BaseServiceModel {
     private String email;
     private String cardNumber;
     private User user;
+    private String username;
 
     public UserPersonalServiceModel() {
     }
 
-
-    @Override
-    public Long getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstName() {

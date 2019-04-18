@@ -12,6 +12,7 @@ public class UserServiceModel extends BaseServiceModel {
     public UserServiceModel() {
     }
 
+
     public String getUsername() {
         return username;
     }

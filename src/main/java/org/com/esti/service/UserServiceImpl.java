@@ -58,12 +58,17 @@ public class UserServiceImpl implements UserService {
         return userServiceModel1;
     }
 
-    @Override
-    public UserServiceModel findUserByUserName(String name) {
-        return this.userRepository.findByUsername(name)
-                .map(u -> this.modelMapper.map(u, UserServiceModel.class))
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
-    }
+//    @Override
+//    public UserServiceModel findUserById(Long id) {
+//        return null;
+//    }
+
+//    @Override
+//    public UserServiceModel findUserByUserName(String name) {
+//        return this.userRepository.findByUsername(name)
+//                .map(u -> this.modelMapper.map(u, UserServiceModel.class))
+//                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+//    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -73,7 +78,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserServiceModel editUserProfile(UserServiceModel userServiceModel, String oldPassword) {
+    public UserServiceModel editUserPassword(UserServiceModel userServiceModel, String oldPassword) {
         User user = this.userRepository.findByUsername(userServiceModel.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
 
@@ -88,4 +93,25 @@ public class UserServiceImpl implements UserService {
 
         return this.modelMapper.map(this.userRepository.saveAndFlush(user), UserServiceModel.class);
     }
+
+    @Override
+    public UserPersonalServiceModel editUserPersonal(Long id, UserPersonalServiceModel userPersonalServiceModel) {
+
+        UserPersonal userPersonal = this.userPersonalRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        userPersonal.setFirstName(userPersonalServiceModel.getFirstName());
+        userPersonal.setLastName(userPersonalServiceModel.getLastName());
+        userPersonal.setBirthday(userPersonalServiceModel.getBirthday());
+        userPersonal.setEmail(userPersonalServiceModel.getEmail());
+        userPersonal.setGender(userPersonalServiceModel.getGender());
+        userPersonal.setCardNumber(userPersonalServiceModel.getCardNumber());
+        userPersonal.setPrimaryAddress(userPersonalServiceModel.getPrimaryAddress());
+        userPersonal.setSecondAddress(userPersonalServiceModel.getSecondAddress());
+
+
+        return this.modelMapper.map(this.userPersonalRepository.saveAndFlush(userPersonal), UserPersonalServiceModel.class);
+    }
+
+
 }

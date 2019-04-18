@@ -17,58 +17,8 @@
                            type="text" th:field="*{username}" id="username"
                            placeholder="Username"
                            name="username">
-                    <!--<small th:each="error : ${#fields.errors('username')}" th:text="${error}"></small>-->
+                    <small th:each="error : ${#fields.errors('username')}" th:text="${error}"></small>
                 </div>
-                <!--<div class="wrap-input100 validate-input m-b-26"-->
-                <!--th:classappend="${#fields.hasErrors('firstName')}? 'text-danger'">-->
-                <!--<span class="label-input100" for="firstName">First Name</span>-->
-                <!--<input class="input100"-->
-                <!--type="text" th:field="*{firstName}" id="firstName"-->
-                <!--placeholder="First Name..."-->
-                <!--name="firstName">-->
-                <!--&lt;!&ndash;<small th:each="error : ${#fields.errors('firstName')}" th:text="${error}"></small>&ndash;&gt;-->
-                <!--</div>-->
-                <!--<div class="wrap-input100 validate-input m-b-26"-->
-                <!--th:classappend="${#fields.hasErrors('middleName')}? 'text-danger'">-->
-                <!--<span class="label-input100" for="middleName">Middle Name</span>-->
-                <!--<input class="input100"-->
-                <!--type="text" th:field="*{middleName}" id="middleName"-->
-                <!--placeholder="Middle name..."-->
-                <!--name="middleName">-->
-                <!--&lt;!&ndash;<small th:each="error : ${#fields.errors('middleName')}" th:text="${error}"></small>&ndash;&gt;-->
-                <!--</div>-->
-                <!--<div class="wrap-input100 validate-input m-b-26"-->
-                <!--th:classappend="${#fields.hasErrors('lastName')}? 'text-danger'">-->
-                <!--<span class="label-input100" for="lastName">Last Name</span>-->
-                <!--<input class="input100"-->
-                <!--type="text" th:field="*{lastName}" id="lastName"-->
-                <!--placeholder="Last name..."-->
-                <!--name="lastName">-->
-                <!--&lt;!&ndash;<small th:each="error : ${#fields.errors('lastName')}" th:text="${error}"></small>&ndash;&gt;-->
-                <!--</div>-->
-                <!--<div class="wrap-input100 validate-input m-b-26"-->
-                <!--th:classappend="${#fields.hasErrors('primaryAddress')}? 'text-danger'">-->
-                <!--<span class="label-input100" for="primaryAddress">Address</span>-->
-                <!--<input class="input100"-->
-                <!--type="text" th:field="*{primaryAddress}" id="primaryAddress"-->
-                <!--placeholder="Address /card/..."-->
-                <!--name="primaryAddress">-->
-                <!--&lt;!&ndash;<small th:each="error : ${#fields.errors('primaryAddress')}" th:text="${error}"></small>&ndash;&gt;-->
-                <!--</div>-->
-                <!--<div class="wrap-input100 validate-input m-b-26">-->
-                <!--<span class="label-input100" for="secondAddress">Address</span>-->
-                <!--<input class="input100"-->
-                <!--type="text" id="secondAddress" placeholder="Address /optional/..."-->
-                <!--name="secondAddress">-->
-                <!--</div>-->
-
-
-                <!--<div class="wrap-input100 validate-input m-b-26">-->
-                    <!--<span class="label-input100" for="email">Email</span>-->
-                    <!--<input class="input100"-->
-                           <!--type="email" id="email" placeholder="Email..." name="email">-->
-
-                <!--</div>-->
                 <div class="wrap-input100 validate-input m-b-26"
                      th:classappend="${#fields.hasErrors('password')}? 'text-danger'">
                     <span class="label-input100" for="password">Password</span>
