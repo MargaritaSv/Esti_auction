@@ -1,7 +1,5 @@
 package org.com.esti.config;
 
-import org.com.esti.models.binding.ArtAddBindingModel;
-import org.com.esti.models.service.ArtServiceModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-//import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -34,21 +31,15 @@ public class ApplicationBeanConfiguration implements WebMvcConfigurer {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public LocaleResolver localeResolver() {
-//        return new CookieLocaleResolver();
-//    }
-//
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
-//        interceptor.setParamName("lang");
-//        registry.addInterceptor(interceptor);
-//
-//        //  registry.addInterceptor(captchaInterceptor);
- //   }
+    @Bean
+    public LocaleResolver localeResolver() {
+        return new CookieLocaleResolver();
+    }
 
-//    public SpringSecurityDialect securityDialect() {
-//        return new SpringSecurityDialect();
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+        interceptor.setParamName("lang");
+        registry.addInterceptor(interceptor);
+    }
 }

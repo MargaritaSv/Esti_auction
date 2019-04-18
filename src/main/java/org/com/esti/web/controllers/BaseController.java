@@ -6,8 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
 public abstract class BaseController {
-    //Map<String, Local> map,
-    protected ModelAndView view(String delParameter, String viewName, Object object) {
+    protected ModelAndView view(Map<String, Local> map, String viewName, Object object) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("viewModel", object);
         modelAndView.setViewName("fragments/layout");
