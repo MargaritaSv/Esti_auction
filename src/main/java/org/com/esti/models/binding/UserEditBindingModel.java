@@ -21,14 +21,11 @@ public class UserEditBindingModel {
     private String email;
     private String cardNumber;
     private String username;
-    private String oldPassword;
-    private String password;
-    private String confirmPassword;
 
     public UserEditBindingModel() {
     }
 
-    @Size(min = 2, max = 65, message = "Name must be between 2 and 65 characters.")
+  //  @Size(min = 2, max = 65, message = "Name must be between 2 and 65 characters.")
     public String getFirstName() {
         return firstName;
     }
@@ -37,7 +34,7 @@ public class UserEditBindingModel {
         this.firstName = firstName;
     }
 
-    @Size(min = 2, max = 65, message = "Name must be between 2 and 65 characters.")
+    //@Size(min = 2, max = 65, message = "Name must be between 2 and 65 characters.")
     public String getMiddleName() {
         return middleName;
     }
@@ -46,7 +43,7 @@ public class UserEditBindingModel {
         this.middleName = middleName;
     }
 
-    @Size(min = 2, max = 65, message = "Name must be between 2 and 65 characters.")
+    //@Size(min = 2, max = 65, message = "Name must be between 2 and 65 characters.")
     public String getLastName() {
         return lastName;
     }
@@ -64,8 +61,8 @@ public class UserEditBindingModel {
         this.birthday = birthday;
     }
 
-    @NotNull
-    @NotEmpty(message = "Gender is required")
+   // @NotNull
+    //@NotEmpty(message = "Gender is required")
     public Gender getGender() {
         return gender;
     }
@@ -115,35 +112,7 @@ public class UserEditBindingModel {
         this.username = username;
     }
 
-    public String getOldPassword() {
-        return oldPassword;
-    }
-
-    public void setOldPassword(String oldPassword) {
-        this.oldPassword = oldPassword;
-    }
-
-    @NotNull
-    @NotEmpty(message = "Password is required")
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @NotNull
-    @NotEmpty(message = "Confirm password is required")
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
-    @Pattern(regexp = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,64}")
+  //  @Pattern(regexp = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,64}")
     public String getEmail() {
         return email;
     }

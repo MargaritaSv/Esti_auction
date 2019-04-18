@@ -53,7 +53,7 @@ public class ServiceController extends BaseController {
     public ModelAndView addArtConfirm(@Valid @ModelAttribute("viewModel") ArtAddBindingModel bindingModel, BindingResult bindingResult, Authentication authentication) throws IOException {
 
         if (bindingResult.hasErrors()) {
-            return super.view("services/add_arte", bindingModel);
+            return super.view("services/add_art", bindingModel);
         }
 
         UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -56,7 +58,7 @@ public class UserController extends BaseController {
     @GetMapping("/edit")
     @PreAuthorize("isAuthenticated()")
     public ModelAndView editProfile(@ModelAttribute(name = "viewModel") UserEditBindingModel bindingModel, Authentication authentication) {
-          UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();
+        UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();
         //    System.out.println("--------> " + authentication);
 
         UserPersonalServiceModel personalServiceModel = this.modelMapper.map(userPersonal, UserPersonalServiceModel.class);
@@ -67,15 +69,21 @@ public class UserController extends BaseController {
 //        return super.view("edit_user", modelAndView);
     }
 
-    @PostMapping("/edit/{id}")
+    @PostMapping("/edit")
     @PreAuthorize("isAuthenticated()")
-    public ModelAndView editProfileConfirm(@PathVariable Long id, @ModelAttribute UserEditBindingModel bindingModel) {
+    public ModelAndView editProfileConfirm(@Validated @ModelAttribute(name = "viewModel") UserEditBindingModel bindingModel, BindingResult bindingResult, Authentication authentication) {
 //        if (bindingModel.getPassword().equals(bindingModel.getConfirmPassword())) {
 //            this.userService.editUserPassword(this.modelMapper.map(bindingModel, UserServiceModel.class), bindingModel.getOldPassword());
 //
 //            return super.redirect("/user/profile");
 //        }
-        this.userService.editUserPersonal(id, this.modelMapper.map(bindingModel, UserPersonalServiceModel.class));
+        if (bindingResult.hasErrors()) {
+            return super.view("/edit_user", bindingModel);
+        }
+
+        UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();
+
+        this.userService.editUserPersonal(userPersonal.getId(), this.modelMapper.map(bindingModel, UserPersonalServiceModel.class));
 
         return super.redirect("/");
 

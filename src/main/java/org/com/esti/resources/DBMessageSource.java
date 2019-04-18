@@ -22,18 +22,13 @@ public class DBMessageSource extends AbstractMessageSource {
 
     @Override
     protected MessageFormat resolveCode(String key, Locale locale) {
-//System.out.println(locale);
-//if(!locale.toString().equals("en") || !locale.toString().equals("bg")){
-//    locale.getLanguage();
-//
-//}
+
         Language message = languageRepository.findByMessageKeyAndLocale(key, locale.getLanguage());
 
         if (message == null || message.equals("keyAbstractAccessDecisionManager.accessDenied")) {
             languageRepository.findByMessageKeyAndLocale(key, LOCAL_CODE_EN);
         }
 
-        System.err.println(" ------- > key" + key + " ----- >  locale : " + locale);
         return new MessageFormat(message.getContent(), locale);
     }
 }
