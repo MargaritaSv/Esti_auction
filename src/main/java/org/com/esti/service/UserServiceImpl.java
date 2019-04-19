@@ -101,6 +101,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         userPersonal.setFirstName(userPersonalServiceModel.getFirstName());
+        userPersonal.setMiddleName(userPersonalServiceModel.getMiddleName());
         userPersonal.setLastName(userPersonalServiceModel.getLastName());
         userPersonal.setBirthday(userPersonalServiceModel.getBirthday());
         userPersonal.setEmail(userPersonalServiceModel.getEmail());

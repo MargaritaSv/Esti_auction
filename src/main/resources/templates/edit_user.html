@@ -32,7 +32,7 @@
                     <input class="input100"
                            type="text" th:field="*{middleName}" id="middleName"
                            placeholder="Middle name..."
-                           name="middleName" th:value="${middlename}">
+                           name="middleName" th:value="${middleName}">
                     <small th:each="error : ${#fields.errors('middleName')}" th:text="${error}"></small>
                 </div>
                 <div class="wrap-input100 validate-input m-b-26"
@@ -50,7 +50,7 @@
                     <span class="label-input100" for="birthday">Birthday</span>
 
                     <div class='input-group date' style="width: 50%" id='birthday'>
-                        <input type='text' class="form-control"/>
+                        <input type='text' class="input100" name="birthday" th:value="${birthday}"/>
                         <span class="input100 input-group-addon">
                              <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -80,7 +80,7 @@
                     <small th:each="error : ${#fields.errors('primaryAddress')}" th:text="${error}"></small>
                 </div>
                 <div class="wrap-input100 validate-input m-b-26">
-                    <span class="label-input100" for="secondAddress">Address</span>
+                    <span class="label-input100" for="secondAddress">Address/second/</span>
                     <input class="input100"
                            type="text" id="secondAddress" placeholder="Address /optional/..."
                            name="secondAddress" th:value="${secondAddress}">

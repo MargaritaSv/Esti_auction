@@ -1,9 +1,6 @@
 package org.com.esti.models.view;
 
-import org.com.esti.domain.entities.UserPersonal;
-
 import java.math.BigDecimal;
-import java.util.Date;
 
 public abstract class AuctionObjectViewModel {
     private Long id;

@@ -74,6 +74,7 @@ public class ServiceController extends BaseController {
     }
 
     @GetMapping("/art/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView aditArt(@PathVariable Long id) {
         ArtServiceModel artServiceModel = this.artService.findProductById(id);
         return this.view("services/edit_art", artServiceModel);

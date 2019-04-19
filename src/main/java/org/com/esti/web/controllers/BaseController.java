@@ -32,6 +32,7 @@ public abstract class BaseController {
     }
 
     private ModelAndView redirect(Map<String, Local> map, ModelAndView modelAndView) {
+
         return modelAndView;
     }
 }

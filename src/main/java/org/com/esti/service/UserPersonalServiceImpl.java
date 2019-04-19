@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserPersonalServiceImpl implements UserPersonalService {
 
@@ -25,5 +28,13 @@ public class UserPersonalServiceImpl implements UserPersonalService {
                 .map(p -> this.modelMapper.map(p, UserPersonalServiceModel.class))
                 .orElseThrow(() -> new UsernameNotFoundException("User personal information doesn't found."));
 
+    }
+
+    @Override
+    public List<UserPersonalServiceModel> findAll() {
+        return this.userPersonalRepository.findAll()
+                .stream()
+                .map(u -> this.modelMapper.map(u, UserPersonalServiceModel.class))
+                .collect(Collectors.toList());
     }
 }

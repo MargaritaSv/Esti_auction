@@ -51,7 +51,7 @@
             <label for="height" class="col-sm-2 col-form-label">Height</label>
             <input type="number" class="form-control" id="height" th:field="*{height}" name="height"
                    th:value="${height}">
-            <small th:each="error : ${#fields.errors('height')}" th:text="${error}"></small>
+            <!--<small th:each="error : ${#fields.errors('height')}" th:text="${error}"></small>-->
         </div>
         <th:block th:include="~{/services/edit_part_estimate}"></th:block>
     </form>
