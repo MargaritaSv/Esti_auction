@@ -16,12 +16,22 @@ public abstract class BaseController {
         return modelAndView;
     }
 
-    protected ModelAndView view(String viewName, Object object) {
-        return this.view(null, viewName, object);
-    }
 
+    protected ModelAndView viewJson(Map<String, Local> map, String viewName, Object object) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("viewModel", object);
+        modelAndView.setViewName("fragments/layout");
+        modelAndView.addObject("viewName", viewName);
+        modelAndView.addObject("title", null);
+
+        return modelAndView;
+    }
     protected ModelAndView view(String viewName) {
         return this.view(null, viewName, new Object());
+    }
+
+    protected ModelAndView view(String viewName,Object object) {
+        return this.view(null, viewName, object);
     }
 
     protected ModelAndView redirect(String url) {

@@ -2,6 +2,7 @@ package org.com.esti.util.validators;
 
 
 import org.com.esti.util.validators.annotations.DateValidation;
+import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
