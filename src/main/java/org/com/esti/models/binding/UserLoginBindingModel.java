@@ -1,5 +1,8 @@
 package org.com.esti.models.binding;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class UserLoginBindingModel {
 
     private String username;
@@ -8,6 +11,8 @@ public class UserLoginBindingModel {
     public UserLoginBindingModel() {
     }
 
+    @NotNull
+    @NotEmpty(message = "Username is required.")
     public String getUsername() {
         return username;
     }
@@ -16,6 +21,8 @@ public class UserLoginBindingModel {
         this.username = username;
     }
 
+    @NotNull
+    @NotEmpty(message = "Password is required.")
     public String getPassword() {
         return password;
     }

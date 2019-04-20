@@ -9,7 +9,7 @@
         <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'text-danger'">
             <label for="name">Name</label>
             <input type="text" class="form-control text-input" th:field="*{name}" id="name" name="name">
-            <!--<small th:each="error : ${#fields.errors('name')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('name')}" th:text="${error}"></small>
         </div>
 
         <div class="form-group">
@@ -21,7 +21,7 @@
             <label for="numberOfBottles" class="col-sm-2 col-form-label">Number of bottles</label>
             <input type="number" class="form-control" id="numberOfBottles" th:fields="*{numberOfBottles}"
                    name="numberOfBottles">
-            <!--<small th:each="error : ${#fields.errors('numberOfBottles')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('numberOfBottles')}" th:text="${error}"></small>
         </div>
 
         <div class="form-group" th:classappend="${#fields.hasErrors('collection')}? 'text-danger'">
@@ -31,7 +31,7 @@
                 <option th:each="collection : ${T(org.com.esti.domain.entities.enums.WineCollections).values()}"
                         th:value="${collection}" th:text="${collection}"></option>
             </select>
-            <!--<small th:each="error : ${#fields.errors('collection')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('collection')}" th:text="${error}"></small>
         </div>
         <th:block th:include="~{/services/add_part_estimate}"></th:block>
     </form>

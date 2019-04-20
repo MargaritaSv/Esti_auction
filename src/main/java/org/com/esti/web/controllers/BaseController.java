@@ -8,30 +8,22 @@ import java.util.Map;
 public abstract class BaseController {
     protected ModelAndView view(Map<String, Local> map, String viewName, Object object) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("viewModel", object);
         modelAndView.setViewName("fragments/layout");
+        modelAndView.addObject("viewModel", object);
         modelAndView.addObject("viewName", viewName);
         modelAndView.addObject("title", null);
 
         return modelAndView;
     }
 
-
-    protected ModelAndView viewJson(Map<String, Local> map, String viewName, Object object) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("viewModel", object);
-        modelAndView.setViewName("fragments/layout");
-        modelAndView.addObject("viewName", viewName);
-        modelAndView.addObject("title", null);
-
-        return modelAndView;
-    }
-    protected ModelAndView view(String viewName) {
-        return this.view(null, viewName, new Object());
-    }
-
-    protected ModelAndView view(String viewName,Object object) {
+    protected ModelAndView view(String viewName, Object object) {
         return this.view(null, viewName, object);
+    }
+
+
+    protected ModelAndView view(String viewName) {
+
+        return this.view(null, viewName, new Object());
     }
 
     protected ModelAndView redirect(String url) {

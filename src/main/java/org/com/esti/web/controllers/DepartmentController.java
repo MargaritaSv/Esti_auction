@@ -79,8 +79,8 @@ public class DepartmentController extends BaseController {
         //  return super.view(null,"departments/users",usersViewModelList);
         org.codehaus.jackson.map.ObjectMapper mapper = new org.codehaus.jackson.map.ObjectMapper();
         //mapper.writeValueAsString(usersViewModelList);
-     //   System.out.println(mapper.writeValueAsString(usersViewModelList));
-        return super.view("departments/users",usersViewModelList);
+        //   System.out.println(mapper.writeValueAsString(usersViewModelList));
+        return super.view("departments/users", usersViewModelList);
     }
 }
 

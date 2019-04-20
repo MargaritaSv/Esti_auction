@@ -17,6 +17,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("user")
 public class UserController extends BaseController {
@@ -44,8 +46,7 @@ public class UserController extends BaseController {
 
     @PostMapping("/register")
     @PreAuthorize("isAnonymous()")
-    public ModelAndView registerConfirm(@ModelAttribute UserRegisterBindingModel bindingModel) {
-
+    public ModelAndView registerConfirm(@Valid @ModelAttribute UserRegisterBindingModel bindingModel) {
         if (!bindingModel.getPassword().equals(bindingModel.getConfirmPassword())) {
             return super.view("/register", bindingModel);
         }
@@ -57,12 +58,15 @@ public class UserController extends BaseController {
 
     @GetMapping("/edit")
     @PreAuthorize("isAuthenticated()")
-    public ModelAndView editProfile(@ModelAttribute(name = "viewModel") UserEditBindingModel bindingModel, Authentication authentication) {
+    public ModelAndView editProfile(@ModelAttribute(name = "viewModel") UserEditBindingModel bindingModel, BindingResult bindingResult, Authentication authentication) {
+        if (bindingResult.hasErrors()) {
+            return this.view("/edit_user", bindingModel);
+        }
         UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();
         //    System.out.println("--------> " + authentication);
 
         UserPersonalServiceModel personalServiceModel = this.modelMapper.map(userPersonal, UserPersonalServiceModel.class);
-        return view("edit_user", personalServiceModel);
+        return this.view("edit_user", personalServiceModel);
 //        modelAndView.addObject("model",
 //                this.modelMapper.map(this.userService.findUserByUserName(principal.getName()), UserProfileViewModel.class));
 //

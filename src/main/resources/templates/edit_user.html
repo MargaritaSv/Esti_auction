@@ -63,9 +63,10 @@
                      th:classappend="${#fields.hasErrors('gender')}? 'text-danger'">
                     <span class="label-input100" for="gender">Gender</span>
                     <select class="form-control" id="gender" th:field="*{gender}" name="gender">
-                        <!--<option selected="" disabled=""> Select</option>-->
+                        <option disabled="true" selected="selected" value="">Select</option>
                         <option th:each="gender : ${T(org.com.esti.domain.entities.enums.Gender).values()}"
-                                th:value="${gender}" th:text="${gender}">
+                                th:value="${gender}" th:text="${gender}"
+                                th:selected="${viewModel.collection == collection}">
                         </option>
                     </select>
                 </div>

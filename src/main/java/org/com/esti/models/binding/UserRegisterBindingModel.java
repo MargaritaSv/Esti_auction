@@ -1,15 +1,19 @@
 package org.com.esti.models.binding;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class UserRegisterBindingModel {
 
     private String username;
     private String password;
     private String confirmPassword;
-    private String email;
 
     public UserRegisterBindingModel() {
     }
 
+    @NotNull
+    @NotEmpty(message = "Username is required.")
     public String getUsername() {
         return username;
     }
@@ -18,6 +22,8 @@ public class UserRegisterBindingModel {
         this.username = username;
     }
 
+    @NotNull
+    @NotEmpty(message = "Password is required.")
     public String getPassword() {
         return password;
     }
@@ -26,19 +32,13 @@ public class UserRegisterBindingModel {
         this.password = password;
     }
 
+    @NotNull
+    @NotEmpty(message = "Confirm your password.")
     public String getConfirmPassword() {
         return confirmPassword;
     }
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }

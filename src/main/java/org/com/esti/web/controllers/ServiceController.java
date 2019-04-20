@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -44,16 +45,17 @@ public class ServiceController extends BaseController {
     }
 
     @GetMapping("/art")
-    public ModelAndView addArt(@ModelAttribute("viewModel") ArtAddBindingModel bindingModel) {
-        return super.view("services/add_art", bindingModel);
+    @PreAuthorize("isAuthenticated()")
+    public ModelAndView addArt(@ModelAttribute(name = "viewModel") ArtAddBindingModel bindingModel) {
+        return this.view("services/add_art", new ArtAddBindingModel());
     }
 
     @PostMapping("/art")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    public ModelAndView addArtConfirm(@Valid @ModelAttribute("viewModel") ArtAddBindingModel bindingModel, BindingResult bindingResult, Authentication authentication) throws IOException {
+    public ModelAndView addArtConfirm(@Valid @ModelAttribute(name = "viewModel") ArtAddBindingModel bindingModel, BindingResult bindingResult, Authentication authentication, RedirectAttributes redirectAttributes) throws IOException {
 
         if (bindingResult.hasErrors()) {
-            return super.view("services/add_art", bindingModel);
+            return this.view("services/add_art", bindingModel);
         }
 
         UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();
@@ -68,9 +70,8 @@ public class ServiceController extends BaseController {
             throw new IllegalArgumentException("Something went wrong!");
         }
 
-        //TODO: msg save success flush
-        // return super.view("services/add_art", bindingModel);
-        return super.redirect("/");
+        redirectAttributes.addFlashAttribute("success", "Canvas " + artServiceModel.getName() + " is saved.");
+        return super.redirect("/department/canvas");
     }
 
     @GetMapping("/art/edit/{id}")
@@ -82,11 +83,11 @@ public class ServiceController extends BaseController {
 
     @PostMapping("/art/edit/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    public ModelAndView aditArtConfirm(@PathVariable Long id, @ModelAttribute ArtAddBindingModel bindingModel) {
+    public ModelAndView aditArtConfirm(@PathVariable Long id, @ModelAttribute ArtAddBindingModel bindingModel, RedirectAttributes redirectAttributes) {
         this.artService.editProduct(id, this.modelMapper.map(bindingModel, ArtServiceModel.class));
 
-//    TODO: redirect to  -> return super.redirect("/art/details/" + id);
-        return super.redirect("/");
+        redirectAttributes.addFlashAttribute("success", "Canvas " + bindingModel.getName() + " is edit.");
+        return super.redirect("/department/art");
     }
 
     @GetMapping("/art/delete/{id}")
@@ -98,13 +99,14 @@ public class ServiceController extends BaseController {
 
 
     @GetMapping("/wine")
+    @PreAuthorize("isAuthenticated()")
     public ModelAndView addWine(@ModelAttribute("viewModel") WineAddBindingModel bindingModel) {
         return super.view("services/add_wine", bindingModel);
     }
 
     @PostMapping("/wine")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    public ModelAndView addWineConfirm(@Valid @ModelAttribute("viewModel") WineAddBindingModel bindingModel, BindingResult bindingResult, Authentication authentication) throws IOException {
+    public ModelAndView addWineConfirm(@Valid @ModelAttribute("viewModel") WineAddBindingModel bindingModel, BindingResult bindingResult, Authentication authentication, RedirectAttributes redirectAttributes) throws IOException {
 
         if (bindingResult.hasErrors()) {
             return super.view("services/add_wine", bindingModel);
@@ -123,12 +125,12 @@ public class ServiceController extends BaseController {
             throw new IllegalArgumentException("Something went wrong!");
         }
 
-        //TODO: msg save success flush
-        // return super.view("services/add_art", bindingModel);
-        return super.redirect("/");
+        redirectAttributes.addFlashAttribute("success", "Wine " + wineServiceModel.getName() + " is saved.");
+        return super.redirect("/department/wines");
     }
 
     @GetMapping("/wine/edit/{id}")
+    @PreAuthorize("isAuthenticated()")
     public ModelAndView aditWine(@PathVariable Long id) {
         WineServiceModel wineServiceModel = this.wineService.findProductById(id);
         return this.view("services/edit_wine", wineServiceModel);
@@ -136,29 +138,31 @@ public class ServiceController extends BaseController {
 
     @PostMapping("/wine/edit/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    public ModelAndView aditWineConfirm(@PathVariable Long id, @ModelAttribute WineServiceModel bindingModel) {
+    public ModelAndView aditWineConfirm(@PathVariable Long id, @ModelAttribute WineServiceModel bindingModel, RedirectAttributes redirectAttributes) {
         this.wineService.editWine(id, this.modelMapper.map(bindingModel, WineServiceModel.class));
 
-//    TODO: redirect to  -> return super.redirect("/art/details/" + id);
-        return super.redirect("/");
+        redirectAttributes.addFlashAttribute("success", "Wine " + bindingModel.getName() + " is changed.");
+        return super.redirect("department/wines");
     }
 
     @GetMapping("/wine/delete/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    public ModelAndView deleteWine(@PathVariable Long id) throws Exception {
+    public ModelAndView deleteWine(@PathVariable Long id, RedirectAttributes redirectAttributes) throws Exception {
         this.wineService.deleteWine(id);
-        return super.redirect("/department/wine");
+        redirectAttributes.addFlashAttribute("success", "Wine is deleted.");
+        return super.redirect("/department/wines");
     }
 
 
     @GetMapping("/watch")
+    @PreAuthorize("isAuthenticated()")
     public ModelAndView addArt(@ModelAttribute("viewModel") WatchAddBindingModel bindingModel) {
         return super.view("services/add_watch", bindingModel);
     }
 
     @PostMapping("/watch")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    public ModelAndView addArtConfirm(@Valid @ModelAttribute("viewModel") WatchAddBindingModel bindingModel, BindingResult bindingResult, Authentication authentication) throws IOException {
+    public ModelAndView addArtConfirm(@Valid @ModelAttribute("viewModel") WatchAddBindingModel bindingModel, BindingResult bindingResult, Authentication authentication, RedirectAttributes redirectAttributes) throws IOException {
 
         if (bindingResult.hasErrors()) {
             return super.view("services/add_watch", bindingModel);
@@ -176,9 +180,8 @@ public class ServiceController extends BaseController {
             throw new IllegalArgumentException("Something went wrong!");
         }
 
-        //TODO: msg save success flush
-        // return super.view("services/add_art", bindingModel);
-        return super.redirect("/");
+        redirectAttributes.addFlashAttribute("success", "Watch " + watchtServiceModel.getName() + " is saved.");
+        return super.redirect("/departments/watches");
     }
 
     @GetMapping("/watch/edit/{id}")
@@ -189,18 +192,19 @@ public class ServiceController extends BaseController {
 
     @PostMapping("/watch/edit/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    public ModelAndView aditWatchConfirm(@PathVariable Long id, @ModelAttribute WatchAddBindingModel bindingModel) {
+    public ModelAndView aditWatchConfirm(@PathVariable Long id, @Valid @ModelAttribute WatchAddBindingModel bindingModel, RedirectAttributes redirectAttributes) {
         this.watchService.editProduct(id, this.modelMapper.map(bindingModel, WatchServiceModel.class));
 
-//    TODO: redirect to  -> return super.redirect("/art/details/" + id);
-        return super.redirect("/");
+        redirectAttributes.addFlashAttribute("success", "Watch " + bindingModel.getName() + " is changed.");
+        return super.redirect("/department/watches");
     }
 
     @GetMapping("/watch/delete/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    public ModelAndView deleteWatch(@PathVariable Long id) throws Exception {
+    public ModelAndView deleteWatch(@PathVariable Long id, RedirectAttributes redirectAttributes) throws Exception {
         this.watchService.deleteWatch(id);
-        return super.redirect("/department/watch");
+        redirectAttributes.addFlashAttribute("success", "Watch is deleted.");
+        return super.redirect("/department/watches");
     }
 
 

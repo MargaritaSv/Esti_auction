@@ -5,6 +5,8 @@
         <h2 data-th-text="#{navbar_wine.lang}"></h2>
     </div>
     <div class="columns features">
+        <th:block th:include="~{services/success}"></th:block>
+
         <th:block th:each="wine : ${viewModel}">
             <!--<div style="width: 100%;position: relative ">-->
             <div class="row mt-3">
@@ -48,5 +50,3 @@
         </th:block>
     </div>
 </section>
-
-<!--TODO: separated class styl divs btns-->

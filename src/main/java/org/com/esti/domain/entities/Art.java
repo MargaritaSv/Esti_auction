@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.time.Year;
 
@@ -43,7 +45,9 @@ public class Art extends AuctionObject {
     }
 
     @Column(name = "width", nullable = false)
-    @Size(min = 1, max = 600, message = "Cannot be empty, should be between 1 - 600 cm.")
+   // @Size(min = 1, max = 600, message = "Cannot be empty, should be between 1 - 600 cm.")
+    @Min(1)
+    @Max(600)
     public Integer getWidth() {
         return width;
     }
@@ -53,7 +57,9 @@ public class Art extends AuctionObject {
     }
 
     @Column(name = "height", nullable = false)
-    @Size(min = 1, max = 600, message = "Cannot be empty, should be between 1 - 600 cm.")
+  //  @Size(min = 1, max = 600, message = "Cannot be empty, should be between 1 - 600 cm.")
+    @Min(1)
+    @Max(600)
     public Integer getHeight() {
         return height;
     }
@@ -62,8 +68,8 @@ public class Art extends AuctionObject {
         this.height = height;
     }
 
-    @Size(min = 10, message = "Description must be at least to 10 characters.")
     @Column(name = "description", columnDefinition = "TEXT")
+    @Size(min = 10, message = "Description must be at least to 10 characters.")
     public String getDescription() {
         return description;
     }

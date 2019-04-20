@@ -2,10 +2,7 @@ package org.com.esti.models.binding;
 
 import org.com.esti.domain.entities.enums.Gender;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class UserEditBindingModel {
@@ -25,7 +22,7 @@ public class UserEditBindingModel {
     public UserEditBindingModel() {
     }
 
-  //  @Size(min = 2, max = 65, message = "Name must be between 2 and 65 characters.")
+    @Size(min = 2, max = 65, message = "Name must be between 2 and 65 characters.")
     public String getFirstName() {
         return firstName;
     }
@@ -34,7 +31,7 @@ public class UserEditBindingModel {
         this.firstName = firstName;
     }
 
-    //@Size(min = 2, max = 65, message = "Name must be between 2 and 65 characters.")
+    @Size(min = 2, max = 65, message = "Name must be between 2 and 65 characters.")
     public String getMiddleName() {
         return middleName;
     }
@@ -43,7 +40,7 @@ public class UserEditBindingModel {
         this.middleName = middleName;
     }
 
-    //@Size(min = 2, max = 65, message = "Name must be between 2 and 65 characters.")
+    @Size(min = 2, max = 65, message = "Name must be between 2 and 65 characters.")
     public String getLastName() {
         return lastName;
     }
@@ -61,8 +58,8 @@ public class UserEditBindingModel {
         this.birthday = birthday;
     }
 
-   // @NotNull
-    //@NotEmpty(message = "Gender is required")
+    @NotNull
+    @NotEmpty(message = "Gender is required")
     public Gender getGender() {
         return gender;
     }
@@ -71,6 +68,8 @@ public class UserEditBindingModel {
         this.gender = gender;
     }
 
+    @NotEmpty
+    @NotNull
     public String getPrimaryAddress() {
         return primaryAddress;
     }
@@ -95,6 +94,8 @@ public class UserEditBindingModel {
         this.country = country;
     }
 
+    @NotNull
+    @NotEmpty
     public String getCardNumber() {
         return cardNumber;
     }
@@ -112,7 +113,7 @@ public class UserEditBindingModel {
         this.username = username;
     }
 
-  //  @Pattern(regexp = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,64}")
+    @Pattern(regexp = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
     public String getEmail() {
         return email;
     }

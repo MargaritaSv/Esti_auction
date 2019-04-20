@@ -16,7 +16,7 @@
                     <input class="input100"
                            type="text" th:field="*{username}" id="username"
                            placeholder="Username"
-                           name="username">
+                           name="username" required>
                     <small th:each="error : ${#fields.errors('username')}" th:text="${error}"></small>
                 </div>
                 <div class="wrap-input100 validate-input m-b-26"
@@ -25,7 +25,7 @@
                     <input class="input100"
                            type="password" th:field="*{password}" id="password"
                            placeholder="Password..."
-                           name="password">
+                           name="password" required>
                     <small th:each="error : ${#fields.errors('password')}" th:text="${error}"></small>
 
                 </div>
@@ -35,7 +35,7 @@
                     <input class="input100"
                            type="password" th:field="*{confirmPassword}" id="confirmPassword"
                            placeholder="Confirm Password..."
-                           name="confirmPassword">
+                           name="confirmPassword" required>
                     <small th:each="error : ${#fields.errors('confirmPassword')}" th:text="${error}"></small>
 
                 </div>

@@ -16,7 +16,8 @@
             <label for="dial">Dial</label>
             <select class="form-control" id="dial" th:field="*{dial}" name="dial">
                 <option th:each=" dial: ${T(org.com.esti.domain.entities.enums.Dial).values()}"
-                        th:value="${dial}" th:text="${dial}">
+                        th:value="${dial}" th:text="${dial}"
+                        th:selected="${viewModel.dial == dial}">
                 </option>
             </select>
             <small th:each="error : ${#fields.errors('dial')}" th:text="${error}"></small>
@@ -37,7 +38,8 @@
             <label for="closure">Closure</label>
             <select class="form-control" id="closure" th:field="*{closure}" name="closure">
                 <option th:each=" closure: ${T(org.com.esti.domain.entities.enums.Closure).values()}"
-                        th:value="${closure}" th:text="${closure}">
+                        th:value="${closure}" th:text="${closure}"
+                        th:selected="${viewModel.closure == closure}">
                 </option>
             </select>
         </div>
@@ -51,7 +53,8 @@
             <label for="collection">Collection</label>
             <select class="form-control" id="collection" th:field="*{collection}" name="collection">
                 <option th:each=" collection: ${T(org.com.esti.domain.entities.enums.WatchCollection).values()}"
-                        th:value="${collection}" th:text="${collection}">
+                        th:value="${collection}" th:text="${collection}"
+                        th:selected="${viewModel.collection == collection}">
                 </option>
             </select>
             <small th:each="error : ${#fields.errors('collection')}" th:text="${error}"></small>

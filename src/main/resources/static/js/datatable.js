@@ -59,7 +59,7 @@ $(document).ready( function () {
             {"mData": "gender"},
             {"mData": "primaryAddress"},
             {"mData": "secondAddress"},
-            
+
             {"mData": "email"}
         ]
     })

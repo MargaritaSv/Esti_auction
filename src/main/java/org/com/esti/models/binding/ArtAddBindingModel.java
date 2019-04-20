@@ -3,9 +3,7 @@ package org.com.esti.models.binding;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.time.Year;
 
 public class ArtAddBindingModel extends AuctionObjectAddBindingModel {
@@ -18,7 +16,7 @@ public class ArtAddBindingModel extends AuctionObjectAddBindingModel {
     public ArtAddBindingModel() {
     }
 
-    //  @Min(value = 2, message = "The name must be at least to 2 characters.")
+    @Size(min = 2, message = "The author must be at least to 2 characters.")
     public String getAuthor() {
         return author;
     }
@@ -27,8 +25,8 @@ public class ArtAddBindingModel extends AuctionObjectAddBindingModel {
         this.author = author;
     }
 
-    //    @DateTimeFormat(iso = DateTimeFormat.ISO.NONE, pattern = "yyyy")
-//    @JsonFormat(pattern = "yyyy")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.NONE, pattern = "yyyy")
+    @JsonFormat(pattern = "yyyy")
     public Year getPainted() {
         return painted;
     }
@@ -39,6 +37,7 @@ public class ArtAddBindingModel extends AuctionObjectAddBindingModel {
 
     @NotNull
     @Min(value = 5, message = "Width must be at least 5cm.")
+    @Max(value = 600, message = "Width must be at least 600cm.")
     public Integer getWidth() {
         return width;
     }
@@ -49,6 +48,7 @@ public class ArtAddBindingModel extends AuctionObjectAddBindingModel {
 
     @NotNull
     @Min(value = 5, message = "Height must be at least 5cm.")
+    @Max(value = 600, message = "Height must be at least 600cm.")
     public Integer getHeight() {
         return height;
     }
@@ -59,6 +59,7 @@ public class ArtAddBindingModel extends AuctionObjectAddBindingModel {
 
     @NotNull
     @NotEmpty(message = "Description is required.")
+    @Size(min = 10, message = "Description must be at least to 10 characters.")
     public String getDescription() {
         return description;
     }

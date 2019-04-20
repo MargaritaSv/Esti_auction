@@ -1,7 +1,3 @@
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml"
->
 <section id="main-head" class="watch">
 </section>
 <div class="container-fluid mt-3">
@@ -13,17 +9,17 @@
         <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'text-danger'">
             <label for="name" class="col-sm-2 col-form-label">Name</label>
             <input type="text" class="form-control" id="name" th:field="*{name}" name="name">
-            <!--<small th:each="error : ${#fields.errors('name')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('name')}" th:text="${error}"></small>
         </div>
         <div class="form-group" th:classappend="${#fields.hasErrors('dial')}? 'text-danger'">
             <label for="dial">Dial</label>
             <select class="form-control" id="dial" th:field="*{dial}" name="dial">
-                <!--<option th:value="" th:text="Избери" selected></option>-->
+                <option disabled="true" selected="selected" value="">Select</option>
                 <option th:each=" dial: ${T(org.com.esti.domain.entities.enums.Dial).values()}"
                         th:value="${dial}" th:text="${dial}">
                 </option>
             </select>
-            <!--<small th:each="error : ${#fields.errors('dial')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('dial')}" th:text="${error}"></small>
         </div>
         <div class="form-group">
             <label class="col-sm-2 col-form-label" for="art-imageUrl">Image</label>
@@ -32,16 +28,17 @@
         <div class="form-group" th:classappend="${#fields.hasErrors('caliber')}? 'text-danger'">
             <label for="caliber" class="col-sm-2 col-form-label">Caliber</label>
             <input type="text" class="form-control" id="caliber" th:field="*{caliber}" name="caliber">
-            <!--<small th:each="error : ${#fields.errors('caliber')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('caliber')}" th:text="${error}"></small>
         </div>
         <div class="form-group" th:classappend="${#fields.hasErrors('watchCase')}? 'text-danger'">
             <label for="watchCase" class="col-sm-2 col-form-label">Watch case</label>
             <input type="watchCase" class="form-control" id="watchCase" th:field="*{watchCase}" name="watchCase">
-            <!--<small th:each="error : ${#fields.errors('watchCase')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('watchCase')}" th:text="${error}"></small>
         </div>
         <div class="form-group" th:classappend="${#fields.hasErrors('closure')}? 'text-danger'">
             <label for="closure">Closure</label>
             <select class="form-control" id="closure" th:field="*{closure}" name="closure">
+                <option disabled="true" selected="selected" value="">Select</option>
                 <option th:each=" closure: ${T(org.com.esti.domain.entities.enums.Closure).values()}"
                         th:value="${closure}" th:text="${closure}">
                 </option>
@@ -50,16 +47,17 @@
         <div class="form-group" th:classappend="${#fields.hasErrors('dimensions')}? 'text-danger'">
             <label for="dimensions" class="col-sm-2 col-form-label">Dimensions</label>
             <input type="number" class="form-control" id="dimensions" th:field="*{dimensions}" name="dimensions">
-            <!--<small th:each="error : ${#fields.errors('dimensions')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('dimensions')}" th:text="${error}"></small>
         </div>
         <div class="form-group" th:classappend="${#fields.hasErrors('collection')}? 'text-danger'">
             <label for="collection">Collection</label>
             <select class="form-control" id="collection" th:field="*{collection}" name="collection">
+                <option disabled="true" selected="selected" value="">Select</option>
                 <option th:each=" collection: ${T(org.com.esti.domain.entities.enums.WatchCollection).values()}"
                         th:value="${collection}" th:text="${collection}">
                 </option>
             </select>
-            <!--<small th:each="error : ${#fields.errors('collection')}" th:text="${error}"></small>-->
+            <small th:each="error : ${#fields.errors('collection')}" th:text="${error}"></small>
         </div>
         <th:block th:include="~{/services/add_part_estimate}"></th:block>
     </form>

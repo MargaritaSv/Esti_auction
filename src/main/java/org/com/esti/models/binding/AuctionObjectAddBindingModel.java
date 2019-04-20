@@ -22,8 +22,8 @@ public class AuctionObjectAddBindingModel {
     public AuctionObjectAddBindingModel() {
     }
 
-    @NotEmpty
-    @NotNull(message = "Name is required")
+    @NotNull
+    @NotEmpty(message = "Name is required")
     public String getName() {
         return name;
     }
@@ -49,7 +49,6 @@ public class AuctionObjectAddBindingModel {
         this.estimateTo = estimateTo;
     }
 
-    @NotNull
     @Positive(message = "Price must be positive number")
     public BigDecimal getEstimateFrom() {
         return estimateFrom;

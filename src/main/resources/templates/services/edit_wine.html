@@ -13,6 +13,11 @@
                    th:value="${name}">
             <small th:each="error : ${#fields.errors('name')}" th:text="${error}"></small>
         </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label" for="art-imageUrl">Image</label>
+            <input type="file" id="art-imageUrl" class="form-control" name="imageUrl"/>
+        </div>
+
         <div class=" form-group" th:classappend="${#fields.hasErrors('numberOfBottles')}? 'text-danger'">
             <label for="numberOfBottles" class="col-sm-2 col-form-label">Number of bottles</label>
             <input type="number" class="form-control" id="numberOfBottles" th:fields="*{numberOfBottles}"
@@ -25,7 +30,8 @@
             <select class="form-control" id="collection" th:fields="*{collection}" name="collection">
                 <option disabled="true" selected="selected" value="">Select</option>
                 <option th:each="collection : ${T(org.com.esti.domain.entities.enums.WineCollections).values()}"
-                        th:value="${collection}" th:text="${collection}"></option>
+                        th:value="${collection}" th:text="${collection}"
+                        th:selected="${viewModel.collection == collection}"></option>
             </select>
             <small th:each="error : ${#fields.errors('collection')}" th:text="${error}"></small>
         </div>
