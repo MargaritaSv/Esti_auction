@@ -59,8 +59,9 @@ $(document).ready( function () {
             {"mData": "gender"},
             {"mData": "primaryAddress"},
             {"mData": "secondAddress"},
+            
             {"mData": "email"}
         ]
     })
-    console.log(table);    
+    console.log(table);
 });
