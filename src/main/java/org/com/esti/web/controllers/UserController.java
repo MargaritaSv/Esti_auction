@@ -121,13 +121,12 @@ public class UserController extends BaseController {
 
         if (bindingModel.getNewPassword().equals(bindingModel.getConfirmNewPassword())) {
             User user = (User) authentication.getPrincipal();
-            this.userService.editUserPassword(user.getId(),this.modelMapper.map(bindingModel,UserPasswordServiceModel.class));
+            this.userService.editUserPassword(user.getId(), this.modelMapper.map(bindingModel, UserPasswordServiceModel.class));
 
             redirectAttributes.addFlashAttribute("success", "Password is changed.");
             return this.redirect("/");
         }
 
-        redirectAttributes.addFlashAttribute("error", "New password doesn't match to confirm password.");
-        return super.redirect("user/password");
+        return this.view("user/password");
     }
 }
