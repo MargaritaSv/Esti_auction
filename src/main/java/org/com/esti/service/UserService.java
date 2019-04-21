@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface UserService extends UserDetailsService {
     UserServiceModel registerUser(UserServiceModel userServiceModel);
 
-  //  UserServiceModel findUserById(Long id);
 
     UserServiceModel editUserPassword(UserServiceModel userServiceModel, String oldPassword);
 

@@ -88,8 +88,24 @@ public class UserController extends BaseController {
 
     }
 
-//    @GetMapping("/edit/{id}")
-//    public ModelAndView editOtherProfile(){
-//
-//    }
+    @GetMapping("/edit/{id}")
+    public ModelAndView editOtherProfile(@PathVariable Long id, @ModelAttribute(name = "viewModel") UserEditBindingModel bindingModel, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return this.view("/edit_user", bindingModel);
+        }
+        UserPersonalServiceModel personalServiceModel = this.modelMapper.map(id, UserPersonalServiceModel.class);
+        return this.view("edit_user", personalServiceModel);
+    }
+
+    @PostMapping("/edit/{id}")
+    public ModelAndView editOtherProfileConfirm(@PathVariable Long id, @Valid @ModelAttribute(name = "viewModel") UserEditBindingModel bindingModel, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return this.view("/edit_user", bindingModel);
+        }
+
+
+        this.userService.editUserPersonal(id, this.modelMapper.map(bindingModel, UserPersonalServiceModel.class));
+
+        return super.redirect("/");
+    }
 }
