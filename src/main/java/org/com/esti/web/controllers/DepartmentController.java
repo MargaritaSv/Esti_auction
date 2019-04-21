@@ -1,7 +1,5 @@
 package org.com.esti.web.controllers;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
-import org.codehaus.jackson.JsonGenerationException;
 import org.com.esti.models.binding.ArtShowBindingModel;
 import org.com.esti.models.binding.UserShowBindingModel;
 import org.com.esti.models.binding.WatchShowBindingModel;
@@ -61,7 +59,7 @@ public class DepartmentController extends BaseController {
 
     @GetMapping(value = "/users", produces = "application/json")
     @PreAuthorize("isAuthenticated()")
-    public ModelAndView allUsers(@ModelAttribute(name = "viewModel") UserShowBindingModel bindingModel) throws JsonGenerationException, JsonMappingException, IOException {
+    public ModelAndView allUsers(@ModelAttribute(name = "viewModel") UserShowBindingModel bindingModel) throws IOException {
         List<UsersViewModel> usersViewModelList = this.userPersonalService.findAll().stream().map(u -> this.modelMapper.map(u, UsersViewModel.class)).collect(Collectors.toList());
         org.codehaus.jackson.map.ObjectMapper mapper = new org.codehaus.jackson.map.ObjectMapper();
         return super.view("departments/users", mapper.writeValueAsString(usersViewModelList));
@@ -71,7 +69,7 @@ public class DepartmentController extends BaseController {
     @GetMapping(value = "/users/json")
     @PreAuthorize("isAuthenticated()")
     public @ResponseBody
-    List<UsersViewModel> allUsersTable(@ModelAttribute(name = "viewModel") UserShowBindingModel bindingModel) throws JsonGenerationException, JsonMappingException, IOException {
+    List<UsersViewModel> allUsersTable(@ModelAttribute(name = "viewModel") UserShowBindingModel bindingModel) {
         List<UsersViewModel> usersViewModelList = this.userPersonalService.findAll().stream().map(u -> this.modelMapper.map(u, UsersViewModel.class)).collect(Collectors.toList());
         return usersViewModelList;
     }

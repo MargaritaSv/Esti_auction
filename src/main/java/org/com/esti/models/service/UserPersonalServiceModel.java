@@ -3,6 +3,9 @@ package org.com.esti.models.service;
 import org.com.esti.domain.entities.User;
 import org.com.esti.domain.entities.enums.Gender;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 public class UserPersonalServiceModel extends BaseServiceModel {
@@ -19,10 +22,13 @@ public class UserPersonalServiceModel extends BaseServiceModel {
     private String cardNumber;
     private User user;
     private String username;
+    private String fullName;
 
     public UserPersonalServiceModel() {
     }
 
+    @Min(2)
+    @Max(65)
     public String getUsername() {
         return username;
     }
@@ -31,6 +37,8 @@ public class UserPersonalServiceModel extends BaseServiceModel {
         this.username = username;
     }
 
+    @Min(2)
+    @Max(65)
     public String getFirstName() {
         return firstName;
     }
@@ -39,6 +47,8 @@ public class UserPersonalServiceModel extends BaseServiceModel {
         this.firstName = firstName;
     }
 
+    @Min(2)
+    @Max(65)
     public String getMiddleName() {
         return middleName;
     }
@@ -47,6 +57,8 @@ public class UserPersonalServiceModel extends BaseServiceModel {
         this.middleName = middleName;
     }
 
+    @Min(2)
+    @Max(65)
     public String getLastName() {
         return lastName;
     }
@@ -95,6 +107,7 @@ public class UserPersonalServiceModel extends BaseServiceModel {
         this.country = country;
     }
 
+    @Pattern(regexp = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
     public String getEmail() {
         return email;
     }
@@ -117,5 +130,10 @@ public class UserPersonalServiceModel extends BaseServiceModel {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+
+    public String getFullName() {
+        return getFirstName() + " " + getMiddleName() + " " + getLastName();
     }
 }

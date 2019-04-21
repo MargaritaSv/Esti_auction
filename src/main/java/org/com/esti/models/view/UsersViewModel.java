@@ -8,15 +8,16 @@ public class UsersViewModel {
 
     private Long id;
     private String firstName;
-//    private String middleName;
-//    private String lastName;
+    private String middleName;
+    private String lastName;
     private LocalDate birthday;
     private Gender gender;
     private String primaryAddress;
     private String secondAddress;
-  //  private String country;
+    private String country;
     private String email;
-//    private String cardNumber;
+    private String cardNumber;
+    private String fullName;
 
     public UsersViewModel() {
     }
@@ -37,21 +38,21 @@ public class UsersViewModel {
         this.firstName = firstName;
     }
 
-//    public String getMiddleName() {
-//        return middleName;
-//    }
-//
-//    public void setMiddleName(String middleName) {
-//        this.middleName = middleName;
-//    }
-//
-//    public String getLastName() {
-//        return lastName;
-//    }
-//
-//    public void setLastName(String lastName) {
-//        this.lastName = lastName;
-//    }
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public LocalDate getBirthday() {
         return birthday;
@@ -84,14 +85,14 @@ public class UsersViewModel {
     public void setSecondAddress(String secondAddress) {
         this.secondAddress = secondAddress;
     }
-//
-//    public String getCountry() {
-//        return country;
-//    }
-//
-//    public void setCountry(String country) {
-//        this.country = country;
-//    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
     public String getEmail() {
         return email;
@@ -101,11 +102,16 @@ public class UsersViewModel {
         this.email = email;
     }
 
-//    public String getCardNumber() {
-//        return cardNumber;
-//    }
-//
-//    public void setCardNumber(String cardNumber) {
-//        this.cardNumber = cardNumber;
-//    }
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getFullName() {
+        return getFirstName() + " " + getMiddleName() + " " + getLastName();
+    }
+
 }

@@ -28,8 +28,8 @@ public class UserPersonal extends BaseEntity {
     public UserPersonal() {
     }
 
-   // @Min(2)
-   // @Max(65)
+    @Min(2)
+    @Max(65)
     @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
@@ -39,8 +39,8 @@ public class UserPersonal extends BaseEntity {
         this.firstName = firstName;
     }
 
-   // @Min(2)
-   // @Max(65)
+    @Min(2)
+    @Max(65)
     @Column(name = "middle_name")
     public String getMiddleName() {
         return middleName;
@@ -50,8 +50,8 @@ public class UserPersonal extends BaseEntity {
         this.middleName = middleName;
     }
 
-   // @Min(2)
-  //  @Max(65)
+    @Min(2)
+    @Max(65)
     @Column(name = "last_name")
     public String getLastName() {
         return lastName;
@@ -107,7 +107,7 @@ public class UserPersonal extends BaseEntity {
         this.country = country;
     }
 
-    //@Pattern(regexp = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,64}")
+    @Pattern(regexp = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
     @Column(name = "email", unique = true)
     public String getEmail() {
         return email;

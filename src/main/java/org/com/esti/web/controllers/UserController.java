@@ -63,14 +63,9 @@ public class UserController extends BaseController {
             return this.view("/edit_user", bindingModel);
         }
         UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();
-        //    System.out.println("--------> " + authentication);
 
         UserPersonalServiceModel personalServiceModel = this.modelMapper.map(userPersonal, UserPersonalServiceModel.class);
         return this.view("edit_user", personalServiceModel);
-//        modelAndView.addObject("model",
-//                this.modelMapper.map(this.userService.findUserByUserName(principal.getName()), UserProfileViewModel.class));
-//
-//        return super.view("edit_user", modelAndView);
     }
 
     @PostMapping("/edit")
@@ -92,4 +87,9 @@ public class UserController extends BaseController {
         return super.redirect("/");
 
     }
+
+//    @GetMapping("/edit/{id}")
+//    public ModelAndView editOtherProfile(){
+//
+//    }
 }
