@@ -3,6 +3,8 @@ package org.com.esti.web.controllers;
 import org.com.esti.domain.entities.User;
 import org.com.esti.domain.entities.UserPersonal;
 import org.com.esti.models.binding.UserEditBindingModel;
+import org.com.esti.models.binding.UserPasswordBindingModel;
+import org.com.esti.models.service.UserPasswordServiceModel;
 import org.com.esti.models.service.UserPersonalServiceModel;
 import org.com.esti.models.binding.UserRegisterBindingModel;
 import org.com.esti.models.service.UserServiceModel;
@@ -16,8 +18,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("user")
@@ -71,13 +75,8 @@ public class UserController extends BaseController {
     @PostMapping("/edit")
     @PreAuthorize("isAuthenticated()")
     public ModelAndView editProfileConfirm(@Validated @ModelAttribute(name = "viewModel") UserEditBindingModel bindingModel, BindingResult bindingResult, Authentication authentication) {
-//        if (bindingModel.getPassword().equals(bindingModel.getConfirmPassword())) {
-//            this.userService.editUserPassword(this.modelMapper.map(bindingModel, UserServiceModel.class), bindingModel.getOldPassword());
-//
-//            return super.redirect("/user/profile");
-//        }
         if (bindingResult.hasErrors()) {
-            return super.view("/edit_user", bindingModel);
+            return super.view("edit_user", bindingModel);
         }
 
         UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();
@@ -100,12 +99,37 @@ public class UserController extends BaseController {
     @PostMapping("/edit/{id}")
     public ModelAndView editOtherProfileConfirm(@PathVariable Long id, @Valid @ModelAttribute(name = "viewModel") UserEditBindingModel bindingModel, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return this.view("/edit_user", bindingModel);
+            return this.view("edit_user", bindingModel);
         }
 
 
         this.userService.editUserPersonal(id, this.modelMapper.map(bindingModel, UserPersonalServiceModel.class));
 
         return super.redirect("/");
+    }
+
+    @GetMapping("/password")
+    public ModelAndView changePassword(@ModelAttribute(name = "viewModel") UserPasswordBindingModel bindingModel) {
+        return this.view("password", bindingModel);
+    }
+
+    @PostMapping("/password")
+    public ModelAndView changePassword(@ModelAttribute(name = "viewModel") UserPasswordBindingModel bindingModel, BindingResult bindingResult, Authentication authentication, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            return this.view("password", bindingModel);
+        }
+
+        if (bindingModel.getNewPassword().equals(bindingModel.getConfirmNewPassword())) {
+            //   this.userService.editUserPassword(this.modelMapper.map(principal.get, UserPasswordServiceModel.class), bindingModel.getOldPassword());
+//TODO: get id from current logged user
+            redirectAttributes.addFlashAttribute("success", "Password is changed.");
+
+            return super.redirect("/");
+        }
+
+        redirectAttributes.addFlashAttribute("error", "New password doesn't match to confirm password.");
+        return super.redirect("/password");
+
+        // this.userService.
     }
 }

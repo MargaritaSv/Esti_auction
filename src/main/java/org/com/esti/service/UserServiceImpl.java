@@ -2,6 +2,7 @@ package org.com.esti.service;
 
 import org.com.esti.domain.entities.User;
 import org.com.esti.domain.entities.UserPersonal;
+import org.com.esti.models.service.UserPasswordServiceModel;
 import org.com.esti.models.service.UserPersonalServiceModel;
 import org.com.esti.models.service.UserServiceModel;
 import org.com.esti.repository.UserPersonalRepository;
@@ -78,20 +79,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserServiceModel editUserPassword(UserServiceModel userServiceModel, String oldPassword) {
-        User user = this.userRepository.findByUsername(userServiceModel.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+    public UserPasswordServiceModel editUserPassword(Long id, UserPasswordServiceModel userPasswordServiceModel) {
 
-        if (!this.bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
+        User user = this.userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        if (!this.bCryptPasswordEncoder.matches(userPasswordServiceModel.getOldPassword(), user.getPassword())) {
             throw new IllegalArgumentException("Incorrect password!");
         }
 
-        user.setPassword(!"".equals(userServiceModel.getPassword()) ?
-                this.bCryptPasswordEncoder.encode(userServiceModel.getPassword()) :
+        user.setPassword(!"".equals(userPasswordServiceModel.getNewPassword()) ?
+                this.bCryptPasswordEncoder.encode(userPasswordServiceModel.getNewPassword()) :
                 user.getPassword());
-        // user.setEmail(userServiceModel.getEmail());
 
-        return this.modelMapper.map(this.userRepository.saveAndFlush(user), UserServiceModel.class);
+        return this.modelMapper.map(this.userRepository.saveAndFlush(user), UserPasswordServiceModel.class);
     }
 
     @Override
