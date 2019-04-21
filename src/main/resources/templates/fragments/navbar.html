@@ -14,13 +14,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <!--<li class="nav-item active">-->
-                    <!--<a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>-->
+                <!--<a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>-->
                 <!--</li>-->
                 <!--<li class="nav-item">-->
-                    <!--<a class="nav-link" href="#" data-th-text="#{navbar_buy.lang}">BUY</a>-->
+                <!--<a class="nav-link" href="#" data-th-text="#{navbar_buy.lang}">BUY</a>-->
                 <!--</li>-->
                 <!--<li class="nav-item">-->
-                    <!--<a class="nav-link" href="#" data-th-text="#{navbar_sell.lang}">SELL</a>-->
+                <!--<a class="nav-link" href="#" data-th-text="#{navbar_sell.lang}">SELL</a>-->
                 <!--</li>-->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -47,8 +47,10 @@
                         <a class="dropdown-item" th:href="@{/department/wines}"
                            data-th-text="#{navbar_wine.lang}">Wine</a>
                         <a class="dropdown-item" th:href="@{/department/watches}" data-th-text="#{navbar_watches.lang}">Watches</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="@{/department/users}">User</a>
+                        <th:block sec:authorize="hasRole('ROLE_MODERATOR')">
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/department/users}">User</a>
+                        </th:block>
                     </div>
                 </li>
                 <th:block sec:authorize="hasRole('ROLE_MODERATOR')">
@@ -84,11 +86,11 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-           <th:block sec:authorize="isAnonymous()">
-               <li  class="nav-item">
-                   <a class="nav-link" th:href="@{/user/login}" data-th-text="#{navbar_log_in.lang}"></a>
-               </li>
-           </th:block>
+                <th:block sec:authorize="isAnonymous()">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/user/login}" data-th-text="#{navbar_log_in.lang}"></a>
+                    </li>
+                </th:block>
                 |
                 <li sec:authorize="isAnonymous()" class="nav-item">
                     <a class="nav-link" th:href="@{/user/register}" data-th-text="#{navbar_register.lang}"></a>
@@ -106,14 +108,14 @@
                            data-th-text="#{navbar_log_out.lang}">Logout</a>
                     </div>
                 </li>
-             <th:block sec:authorize="isAuthenticated()" >
-                 <li class="nav-item active">
-                     <form action="logout?user/login" method="post">
-                         <input type="hidden" name="_csrf" value="80417983-fe8b-45c7-963e-31f6915a1560">
-                         <button class="logout-button nav-link">Logout</button>
-                     </form>
-                 </li>
-             </th:block>
+                <th:block sec:authorize="isAuthenticated()">
+                    <li class="nav-item active">
+                        <form action="logout?user/login" method="post">
+                            <input type="hidden" name="_csrf" value="80417983-fe8b-45c7-963e-31f6915a1560">
+                            <button class="logout-button nav-link">Logout</button>
+                        </form>
+                    </li>
+                </th:block>
             </ul>
         </div>
     </nav>

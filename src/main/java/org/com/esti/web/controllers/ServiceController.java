@@ -92,8 +92,9 @@ public class ServiceController extends BaseController {
 
     @GetMapping("/art/delete/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    public ModelAndView deleteArt(@PathVariable Long id) throws Exception {
+    public ModelAndView deleteArt(@PathVariable Long id, RedirectAttributes redirectAttributes) throws Exception {
         this.artService.deleteArt(id);
+        redirectAttributes.addFlashAttribute("success", "Canvas is deleted.");
         return super.redirect("/department/art");
     }
 
@@ -206,6 +207,4 @@ public class ServiceController extends BaseController {
         redirectAttributes.addFlashAttribute("success", "Watch is deleted.");
         return super.redirect("/department/watches");
     }
-
-
 }
