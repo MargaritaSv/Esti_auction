@@ -21,7 +21,7 @@ import javax.validation.Validator;
 import java.util.Locale;
 
 @Configuration
-public class ApplicationBeanConfiguration extends WebMvcConfigurerAdapter {
+public class ApplicationBeanConfiguration implements WebMvcConfigurer {
 
     @Bean
     public ModelMapper modelMapper() {
@@ -39,4 +39,27 @@ public class ApplicationBeanConfiguration extends WebMvcConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean(name = "localeResolver")
+    public LocaleResolver getLocalResolver() {
+        CookieLocaleResolver resolver = new CookieLocaleResolver();
+        resolver.setCookieDomain("myAppLocaleCookie");
+        resolver.setCookieMaxAge(60 * 60);
+        return resolver;
+    }
+
+    public MessageSource getMessageResource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:i18n/messages");
+        messageSource.setDefaultEncoding("UTF-8");
+
+        return messageSource;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+        interceptor.setParamName("lang");
+
+        registry.addInterceptor(interceptor).addPathPatterns("/*");
+    }
 }
