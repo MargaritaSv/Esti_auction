@@ -8,7 +8,7 @@
             </div>
 
             <form id="login100-form validate-form" class="w-50 mx-auto" th:method="post"
-                  th:action="@{/user/edit}" th:object="${viewModel}">
+                  th:action="@{/user/edit/{id}(id=${id})}" th:object="${viewModel}">
 
                 <div class="wrap-input100 validate-input m-b-26"
                      th:classappend="${#fields.hasErrors('username')}? 'text-danger'">
@@ -86,13 +86,11 @@
                            type="text" id="secondAddress" placeholder="Address /optional/..."
                            name="secondAddress" th:value="${secondAddress}">
                 </div>
-                <div class="wrap-input100 validate-input m-b-26"
-                     th:classappend="${#fields.hasErrors('cardNumber')}? 'text-danger'">
+                <div class="wrap-input100 validate-input m-b-26">
                     <span class="label-input100" for="cardNumber">Card number</span>
                     <input class="input100"
                            type="text" id="cardNumber" placeholder="card number"
                            name="cardNumber" th:value="${cardNumber}">
-                    <small th:each="error : ${#fields.errors('cardNumber')}" th:text="${error}"></small>
                 </div>
                 <div class="wrap-input100 validate-input m-b-26">
                     <span class="label-input100" for="email">Email</span>

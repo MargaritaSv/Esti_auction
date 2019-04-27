@@ -63,10 +63,8 @@ public class ArtServiceImpl implements ArtService {
         art.setWidth(artServiceModel.getWidth());
         art.setPainted(artServiceModel.getPainted());
         art.setEstimateFrom(artServiceModel.getEstimateFrom());
-        art.setEstimateFrom(artServiceModel.getEstimateTo());
-        art.setImageUrl(artServiceModel.getImageUrl());
+        art.setEstimateTo(artServiceModel.getEstimateTo());
 
-        //TODO:estimatedBy
         return this.modelMapper.map(this.artRepository.save(art), ArtServiceModel.class);
     }
 
@@ -74,7 +72,7 @@ public class ArtServiceImpl implements ArtService {
     public void deleteArt(Long id) throws Exception {
         try {
             this.artRepository.deleteById(id);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             throw new Exception("Canvas isn't exist.");
         }
     }

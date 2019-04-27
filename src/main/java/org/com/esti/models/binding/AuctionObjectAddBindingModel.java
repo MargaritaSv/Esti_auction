@@ -3,6 +3,8 @@ package org.com.esti.models.binding;
 import org.com.esti.domain.entities.UserPersonal;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -74,6 +76,7 @@ public class AuctionObjectAddBindingModel {
         this.createdAt = createdAt;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
     public Date getUpdatedAt() {
         return updatedAt;
     }

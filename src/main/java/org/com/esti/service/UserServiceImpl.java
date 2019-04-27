@@ -59,17 +59,12 @@ public class UserServiceImpl implements UserService {
         return userServiceModel1;
     }
 
-//    @Override
-//    public UserServiceModel findUserById(Long id) {
-//        return null;
-//    }
-
-//    @Override
-//    public UserServiceModel findUserByUserName(String name) {
-//        return this.userRepository.findByUsername(name)
-//                .map(u -> this.modelMapper.map(u, UserServiceModel.class))
-//                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
-//    }
+    @Override
+    public UserPersonalServiceModel findById(Long id) {
+        return this.userRepository.findById(id)
+                .map(u -> this.modelMapper.map(u, UserPersonalServiceModel.class))
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

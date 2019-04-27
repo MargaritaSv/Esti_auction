@@ -1,7 +1,6 @@
 package org.com.esti.models.service;
 
 import org.com.esti.domain.entities.UserPersonal;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -39,7 +38,6 @@ public class AuctionObjectServiceModel {
         this.name = name;
     }
 
-    @NotNull(message = EMPTY)
     public String getImageUrl() {
         return imageUrl;
     }

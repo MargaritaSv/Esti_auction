@@ -58,8 +58,8 @@ public class UserEditBindingModel {
         this.birthday = birthday;
     }
 
-    @NotNull
-    @NotEmpty(message = "Gender is required")
+//    @NotNull
+//    @NotEmpty(message = "Gender is required")
     public Gender getGender() {
         return gender;
     }
@@ -113,7 +113,7 @@ public class UserEditBindingModel {
         this.username = username;
     }
 
-    @Pattern(regexp = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
+    @Pattern(regexp = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}",message = "not valid email")
     public String getEmail() {
         return email;
     }

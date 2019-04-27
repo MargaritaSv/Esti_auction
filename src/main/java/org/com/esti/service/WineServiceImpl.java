@@ -59,17 +59,15 @@ public class WineServiceImpl implements WineService {
         wine.setNumberOfBottles(wineServiceModel.getNumberOfBottles());
         wine.setEstimateFrom(wineServiceModel.getEstimateFrom());
         wine.setEstimateTo(wineServiceModel.getEstimateTo());
-        wine.setCreatedAt(wineServiceModel.getCreatedAt());
-        wine.setImageUrl(wineServiceModel.getImageUrl());
 
-        return this.modelMapper.map(this.wineRepository.save(wine),WineServiceModel.class);
+        return this.modelMapper.map(this.wineRepository.save(wine), WineServiceModel.class);
     }
 
     @Override
     public void deleteWine(Long id) throws Exception {
         try {
             this.wineRepository.deleteById(id);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             throw new Exception("Wine isn't found.");
         }
     }

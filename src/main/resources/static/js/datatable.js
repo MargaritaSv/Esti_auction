@@ -1,6 +1,4 @@
 $(document).ready(function () {
-    // var data = JSON.stringify('th:object="${viewModel}"');
-    // console.log(data)
     var table = $('#userTable').DataTable({
         "ajax": "/department/users/json",
         "sAjaxDataProp": "",
@@ -17,8 +15,8 @@ $(document).ready(function () {
             {"data": "cardNumber"},
             {
                 'data': 'Action', 'render': function (data, type, row, meta) {
-                    return '<div class="row justify-content-center"><input type="button" id="' + row.id + '" value="Edit" class="btn btn-outline-warning btnEdit" /> </div>' +
-                        '<div class="row justify-content-center"><input type="button" id="' + row.id + '" value="Delete" class="btn btn-outline-dark btnDelete" /></div>';
+                    return '<div class="row justify-content-center"><input type="button" id="' + row.id + '" value="Edit" class="btn btn-outline-warning btnEdit" /> </div>';
+                        // + '<div class="row justify-content-center"><input type="button" id="' + row.id + '" value="Delete" class="btn btn-outline-dark btnDelete" /></div>'
                 }
 
             },
@@ -26,13 +24,36 @@ $(document).ready(function () {
     })
 
     $("#userTable tbody").on("click", ".btnEdit", function () {
-        // var data = table.row(this).data();
-//var x = table.row(this).id.text();
-        //  alert(data);
-        //   $.ajax({
-        //       url: "user/edit/1",
-        //       type: "GET",
-        //       data: "id"
-        //   });
+        var id = this.id;
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8000/user/edit/" + id,
+            success: function (data, status) {
+                console.log(data)
+            },
+            error: function (xhr, status, errorThrown) {
+                console.log(xhr);
+                console.log(status);
+                console.log(errorThrown);
+            }
+            //  data: id,
+
+        });
+    });
+
+    $("#userTable tbody").on("click", ".btnDelete", function () {
+        var id = this.id;
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8000/user/delete/" + id,
+            success: function (data, status) {
+                console.log(data)
+            },
+            error: function (xhr, status, errorThrown) {
+                console.log(xhr);
+                console.log(status);
+                console.log(errorThrown);
+            }
+        });
     });
 });

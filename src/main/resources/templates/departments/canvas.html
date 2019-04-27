@@ -5,10 +5,9 @@
         <h2 data-th-text="#{navbar_canvas.lang}"></h2>
     </div>
     <div class="columns features">
-        <th:block th:each="canvas : ${viewModel}">
-            <th:block th:include="~{services/success}"></th:block>
+        <th:block th:include="~{services/success}"></th:block>
 
-            <!--<div style="width: 100%;position: relative ">-->
+        <th:block th:each="canvas : ${viewModel}">
             <div class="row mt-3">
                 <div class="auction-imageUrl" style="float: left; width: 30%;">
                     <!--<a class="imageUrl-capture" href="#">-->

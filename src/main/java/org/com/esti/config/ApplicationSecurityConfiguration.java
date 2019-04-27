@@ -18,23 +18,6 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private DataSource dataSource;
-
-    @Autowired
-    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .inMemoryAuthentication()
-//                    .withUser("USER")
-//                        .password("password")
-//                        .roles("USER")
-//                        .and()
-//                  .withUser("ADMIN")
-//                        .password("password")
-//                        .roles("ADMIN","USER")
-//                        .and();
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -54,11 +37,5 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                     .and()
                 .logout()
                     .logoutSuccessUrl("/user/register");
-    }
-
-    PersistentTokenRepository persistentTokenRepository() {
-        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
-        tokenRepository.setDataSource(dataSource);
-        return tokenRepository;
     }
 }

@@ -1,12 +1,9 @@
 package org.com.esti.web.controllers;
 
-import org.springframework.cglib.core.Local;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
-
 public abstract class BaseController {
-    protected ModelAndView view(Map<String, Local> map, String viewName, Object object) {
+    protected ModelAndView view(String viewName, Object object) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fragments/layout");
         modelAndView.addObject("viewModel", object);
@@ -16,24 +13,14 @@ public abstract class BaseController {
         return modelAndView;
     }
 
-    protected ModelAndView view(String viewName, Object object) {
-        return this.view(null, viewName, object);
-    }
-
-
     protected ModelAndView view(String viewName) {
 
-        return this.view(null, viewName, new Object());
+        return this.view(viewName, new Object());
     }
 
     protected ModelAndView redirect(String url) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:" + url);
-
-        return this.redirect(null, modelAndView);
-    }
-
-    private ModelAndView redirect(Map<String, Local> map, ModelAndView modelAndView) {
 
         return modelAndView;
     }

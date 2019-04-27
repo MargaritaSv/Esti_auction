@@ -132,18 +132,18 @@ public class ServiceController extends BaseController {
 
     @GetMapping("/wine/edit/{id}")
     @PreAuthorize("isAuthenticated()")
-    public ModelAndView aditWine(@PathVariable Long id) {
+    public ModelAndView editWine(@PathVariable Long id) {
         WineServiceModel wineServiceModel = this.wineService.findProductById(id);
         return this.view("services/edit_wine", wineServiceModel);
     }
 
     @PostMapping("/wine/edit/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    public ModelAndView aditWineConfirm(@PathVariable Long id, @ModelAttribute WineServiceModel bindingModel, RedirectAttributes redirectAttributes) {
+    public ModelAndView editWineConfirm(@PathVariable Long id, @Valid @ModelAttribute(name = "viewModel") WineAddBindingModel bindingModel, BindingResult bindingResult, Authentication authentication, RedirectAttributes redirectAttributes) {
         this.wineService.editWine(id, this.modelMapper.map(bindingModel, WineServiceModel.class));
 
         redirectAttributes.addFlashAttribute("success", "Wine " + bindingModel.getName() + " is changed.");
-        return super.redirect("department/wines");
+        return this.redirect("/department/wines");
     }
 
     @GetMapping("/wine/delete/{id}")
@@ -182,7 +182,7 @@ public class ServiceController extends BaseController {
         }
 
         redirectAttributes.addFlashAttribute("success", "Watch " + watchtServiceModel.getName() + " is saved.");
-        return super.redirect("/departments/watches");
+        return super.redirect("/department/watches");
     }
 
     @GetMapping("/watch/edit/{id}")
