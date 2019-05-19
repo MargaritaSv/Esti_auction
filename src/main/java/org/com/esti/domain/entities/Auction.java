@@ -12,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "auction")
@@ -28,6 +29,7 @@ public class Auction extends BaseController {
     private UserPersonal estimatedBy;
     private Date createdAt;
     private Date updatedAt;
+    private Set<AuctionObject> auctionObjects;
 
     public Auction() {
     }
@@ -62,7 +64,7 @@ public class Auction extends BaseController {
     }
 
     @Column(name = "date", columnDefinition = "DATETIME")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh-mm")
     public LocalDate getDate() {
         return date;
     }
@@ -104,4 +106,16 @@ public class Auction extends BaseController {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "auction_abjects",
+//            joinColumns = @JoinColumn(name = "auction_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "auction_object_id", referencedColumnName = "id"))
+//    public Set<AuctionObject> getAuctionObjects() {
+//        return auctionObjects;
+//    }
+//
+//    public void setAuctionObjects(Set<AuctionObject> auctionObjects) {
+//        this.auctionObjects = auctionObjects;
+//    }
 }

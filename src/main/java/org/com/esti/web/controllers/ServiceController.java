@@ -6,6 +6,7 @@ import org.com.esti.models.binding.ArtAddBindingModel;
 import org.com.esti.models.binding.WatchAddBindingModel;
 import org.com.esti.models.binding.WineAddBindingModel;
 import org.com.esti.models.service.ArtServiceModel;
+import org.com.esti.models.service.AuctionAddBindingModel;
 import org.com.esti.models.service.WatchServiceModel;
 import org.com.esti.models.service.WineServiceModel;
 import org.com.esti.service.ArtService;
@@ -207,4 +208,28 @@ public class ServiceController extends BaseController {
         redirectAttributes.addFlashAttribute("success", "Watch is deleted.");
         return super.redirect("/department/watches");
     }
+
+    @GetMapping("/auction")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    public ModelAndView addAuction(@ModelAttribute AuctionAddBindingModel bindingModel) {
+        return this.view("services/add_auction", bindingModel);
+    }
+
+    @PostMapping("/auction")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    public ModelAndView addAuctionConfirm(@Valid @ModelAttribute AuctionAddBindingModel bindingModel, BindingResult bindingResult, Authentication authentication, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            return super.view("services/add_auction", bindingModel);
+        }
+
+        UserPersonal userPersonal = ((User) authentication.getPrincipal()).getUserPersonal();
+        bindingModel.setEstimatedBy(userPersonal);
+
+        redirectAttributes.addFlashAttribute("success", "Auction " + " is added");
+        return this.redirect("departments/auctions");
+
+    }
+
+
+
 }

@@ -5,6 +5,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -29,6 +30,7 @@ public abstract class AuctionObject extends BaseEntity {
     private UserPersonal estimatedBy;
     private Date createdAt;
     private Date updatedAt;
+    private Set<Auction> auctions;
 
     public AuctionObject() {
     }
@@ -102,4 +104,13 @@ public abstract class AuctionObject extends BaseEntity {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+//    @ManyToMany(mappedBy = "auction_object")
+//    public Set<Auction> getAuctions() {
+//        return auctions;
+//    }
+//
+//    public void setAuctions(Set<Auction> auctions) {
+//        this.auctions = auctions;
+//    }
 }

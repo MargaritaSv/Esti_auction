@@ -5,7 +5,8 @@
         <h2>𝒜𝒹𝒹 𝒜𝓊𝒸𝓉𝒾𝑜𝓃</h2>
     </div>
     <hr class="bg-resev hr-2"/>
-    <form class="w-50 mx-auto" enctype="multipart/form-data" th:method="post" th:action="@{/service/wine}" th:object="${viewModel}">
+    <form class="w-50 mx-auto" enctype="multipart/form-data" th:method="post" th:action="@{/service/auction}"
+          th:object="${viewModel}">
 
         <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'text-danger'">
             <label for="name">Name</label>
@@ -20,16 +21,53 @@
                    name="place">
             <small th:each="error : ${#fields.errors('place')}" th:text="${error}"></small>
         </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label" for="art-imageUrl">Image</label>
+            <input type="file" id="art-imageUrl" class="form-control" name="imageUrl"/>
+        </div>
 
-        <div class=" form-group" th:classappend="${#fields.hasErrors('date')}? 'text-danger'">
+        <div class="form-group" th:classappend="${#fields.hasErrors('date')}? 'text-danger'">
             <label for="date" class="col-sm-2 col-form-label">Date</label>
             <input type="text" class="form-control" id="date" th:fields="*{date}" th:placeholde="yyyy-mm-dd"
                    name="date">
             <small th:each="error : ${#fields.errors('date')}" th:text="${error}"></small>
         </div>
 
+        <div class="form-group">
+            <label for="date" class="col-sm-2 col-form-label">Date</label>
+            <div class='input-group date col-sm-8' data-date-format="dd-mm-yyyy hh:mm" id='openDate'>
+                <input type='text' class="form-control"/>
+                <span class="input-group-addon">
+                    <i style="font-size: 34px; padding-left: 1%;" class="glyphicon glyphicon-calendar"
+                       aria-hidden="true">
+                    </i>
+                </span>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 col-form-label">Add action objects</label>
+            <select id="add-object" multiple="multiple" data-live-search="true">
+                <option value='elem_1' selected>elem 1</option>
+                <option value='elem_2'>elem 2</option>
+                <option value='elem_3'>elem 3</option>
+                <option value='elem_4' selected>elem 4</option>
+            </select>
+        </div>
         <div class="col-md-12 text-center">
             <button class="btn btn-info">SUBMIT</button>
         </div>
     </form>
 </div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#openDate').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:00',
+            daysOfWeekDisabled: [0, 1]
+        });
+    });
+    $('#add-object').multiSelect();
+
+</script>
